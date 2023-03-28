@@ -9,7 +9,11 @@ interface ProvidersProps {
 
 const Providers: FC<ProvidersProps> = ({ children }) => {
   return (
-    <ThemeProvider defaultTheme="system" enableSystem>
+    <ThemeProvider
+      disableTransitionOnChange={false}
+      defaultTheme="system"
+      enableSystem={true}
+    >
       {children}
     </ThemeProvider>
   );
