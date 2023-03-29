@@ -3,6 +3,8 @@ export interface BlogPost {
     title: string;
     imageUrl: string;
     blurhash: string;
+    preparationTime: string;
+    description: string;
     ingredients: string[];
     publishedAt: string;
   };

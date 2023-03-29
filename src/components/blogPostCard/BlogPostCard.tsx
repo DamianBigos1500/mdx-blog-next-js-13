@@ -10,6 +10,7 @@ interface BlogPostCardProps {
   post: BlogPost;
 }
 
+
 const BlogPostCard: FC<BlogPostCardProps> = ({ post }) => {
   const ingredientsString = post.data.ingredients.join(', ');
 
@@ -20,27 +21,55 @@ const BlogPostCard: FC<BlogPostCardProps> = ({ post }) => {
           <Link href={`/blogs/${post.slug}`}>{post.data.title}</Link>
         </div>
 
-        <Image
-          src={post.data.imageUrl}
-          width={400}
-          height={200}
-          style={{ objectFit: 'cover' }}
-          className={styles.post_card__image}
-          placeholder="blur"
-          blurDataURL={post.data.blurhash}
-          sizes="fill"
-          alt={post.data.title}
-        />
-        <div></div>
-        
+        <div>
+          <Image
+            src={post.data.imageUrl}
+            width={400}
+            height={240}
+            style={{ objectFit: 'cover' }}
+            className={styles.post_card__image}
+            placeholder="blur"
+            blurDataURL={post.data.blurhash}
+            alt={post.data.title}
+         
+          />
 
-        <div className={styles.post_card__ingredients}>Ingredients: {ingredientsString}</div>
+          <Image
+            src={post.data.imageUrl}
+            width={400}
+            height={240}
+            style={{ objectFit: 'cover' }}
+            className={`${styles.post_card__image_second} ${styles.post_card__image_second_back}`}
+            placeholder="blur"
+            blurDataURL={post.data.blurhash}
+            alt={post.data.title}
+         
+          />
+        </div>
+
+        <div className={styles.post_card__product_info}>
+          <div className={styles.post_card__preparation_time}>
+            {post.data.preparationTime} min to prepare
+          </div>
+
+          <div className={styles.post_card__description}>
+            {post.data.description}
+          </div>
+
+          <div className={styles.post_card__ingredients}>
+            Ingredients: {ingredientsString}
+          </div>
+        </div>
       </div>
 
       <div className={styles.post_card__right}>
-        <div className={styles.post_card__date}>{post.data.publishedAt}</div>
-        <div className={styles.post_card__date}>Read recepice...</div>
-      
+        <div className={styles.post_card__additional_info}>
+          <div className={styles.post_card__date}>{post.data.publishedAt}</div>
+          <div className={styles.post_card__read_time}>
+            {post.readingTime} min reading
+          </div>
+        </div>
+        <div className={styles.post_card__button}>Read recepice...</div>
       </div>
     </div>
   );

@@ -3,12 +3,13 @@
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+  transition: height 0.2s ease-in;
+  transition-delay: 0.2s;
 
   &__left {
     position: relative;
     width: 100%;
     display: flex;
-    align-items: flex-end;
   }
 
   &__right {
@@ -18,12 +19,6 @@
     justify-content: space-between;
   }
 
-  &__ingredients {
-    padding-left: 1rem;
-    font-size: 0.8rem;
-    transition: opacity 0.2s ease-out, transform 0.2s ease-in;
-  }
-
   &__title {
     position: absolute;
     top: 1rem;
@@ -31,36 +26,157 @@
     padding: 0.4rem 1.6rem;
     font-size: 1.8rem;
     background-image: var(--gradient-primary);
-    transition: transform 0.2s ease-out;
+    transition: transform 0.4s ease-out;
     clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
-    z-index: 10;
+    z-index: 100;
+  }
+
+  &__product_info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 4rem;
+  }
+
+  &__preparation_time {
+    transition: opacity 0.2s ease-in;
+    transition-delay: 0.5s;
+    margin-left: 5rem;
+    opacity: 0;
+  }
+
+  &__description {
+    transition: opacity 0.2s ease-in;
+    transition-delay: 0.5s;
+    margin-left: 5rem;
+    opacity: 0;
+  }
+
+  &__ingredients {
+    padding-left: 1rem;
+    font-size: 0.8rem;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-in;
+    margin-top: auto;
   }
 
   &__image {
+    position: relative;
     border-radius: 0.375em;
     border: 2px wheat solid;
     transition: transform 0.2s ease-out;
-      perspective: 1500px;
-      cursor: pointer;
+    perspective: 1500px;
+    z-index: 5;
+    cursor: pointer;
+  }
+
+  &__image_second {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 0.375em;
+    border: 2px wheat solid;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  &__additional_info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
   }
 
   &__date {
     white-space: nowrap;
   }
 
+  &__read_time {
+    color: #aaa;
+    white-space: nowrap;
+  }
+
+  &__read_more_button {
+    white-space: nowrap;
+  }
+
   &:hover {
+ 
+
     & .post_card__title {
-      transform: translateY(-1.6rem) translate(-8rem)  perspective(30rem)  rotateY(20deg) rotateZ(-3deg);
+      transform: translateY(-1.6rem) translateX(20rem);
       clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
     }
 
     & .post_card__image {
-      transform:perspective(40rem)  translateY(0.2rem) scale(1.05) rotateY(15deg) rotateZ(-3deg);
+      transform: perspective(40rem) translateY(0.2rem) scale(1.05)
+        rotateX(12deg) rotateY(20deg) rotateZ(-3deg);
+    }
+
+    & .post_card__preparation_time {
+      opacity: 1;
+    }
+    & .post_card__description {
+      opacity: 1;
     }
 
     & .post_card__ingredients {
-      transform: translateY(1.6rem) ;
-      opacity: 0;
+      transform: translateX(4rem);
     }
+
+    & .post_card__image_second {
+      opacity: 1;
+      animation: flipCard 1s forwards;
+    }
+  }
+
+  &__button {
+    --border: 1px; /* the border width */
+    --slant: 0.7rem; /* control the slanted corners */
+    --color: var(#39b385); /* the color */
+
+    font-size: 1rem;
+    padding: 0.4rem 1.2rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--color);
+    background: linear-gradient(to bottom left, #39b385 50%, #0000 50.1%) top
+        right,
+      linear-gradient(to top right, #39b385 50%, #0000 50.1%) bottom left;
+
+    background-size: calc(var(--slant) + 1.3 * var(--border))
+      calc(var(--slant) + 1.3 * var(--border));
+
+    background-repeat: no-repeat;
+
+    clip-path: polygon(
+      0 0,
+      calc(100% - var(--slant)) 0,
+      100% var(--slant),
+      100% 100%,
+      var(--slant) 100%,
+      0 calc(100% - var(--slant))
+    );
+
+    transition: color var(--t, 0.3s), background-size 0.3s;
+    &:hover {
+      background-size: 100% 100%;
+      color: #fff;
+      --t: 0.2s 0.1s;
+    }
+  }
+}
+
+@keyframes flipCard {
+  0% {
+    z-index: 0;
+    transform: translateX(0) translateY(0);
+  }
+  20% {
+    transform: translateX(90%) rotate(-10deg);
+  }
+  100% {
+    z-index: 10;
+    transform: translateX(4rem) translateY(2rem) rotate(-3deg);
   }
 }
