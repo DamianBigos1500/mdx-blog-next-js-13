@@ -2,10 +2,12 @@
 
 :root {
   --bg-color-primary: #fff;
-  --bg-color-secondary: #222;
+  --bg-color-secondary: #ccc;
   --color-primary: #000;
+  --color-main: #9be15d;
   --black: black;
   --white: white;
+  --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
 }
 
 [data-theme='dark'] {

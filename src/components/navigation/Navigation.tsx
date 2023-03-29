@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styles from '../../styles/navigation/navigation.module.scss';
+import styles from '@/styles/components/navigation/navigation.module.scss';
 import Link from 'next/link';
 
 interface NavigationProps {}
@@ -13,7 +13,7 @@ const Navigation: FC<NavigationProps> = ({}) => {
 
       <ul className={styles.nav__links}>
         <li className={styles.nav__item} style={{}}>
-          <Link href="/blog">Blogs</Link>
+          <Link href="/blogs">Blogs</Link>
         </li>
 
         <li className={styles.nav__item}>
