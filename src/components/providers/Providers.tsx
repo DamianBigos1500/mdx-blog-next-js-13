@@ -1,5 +1,6 @@
 'use client';
 
+import { MDXProvider } from '@mdx-js/react';
 import { ThemeProvider } from 'next-themes';
 import { FC, ReactNode } from 'react';
 
@@ -9,13 +10,15 @@ interface ProvidersProps {
 
 const Providers: FC<ProvidersProps> = ({ children }) => {
   return (
-    <ThemeProvider
-      disableTransitionOnChange={false}
-      defaultTheme="system"
-      enableSystem={true}
-    >
-      {children}
-    </ThemeProvider>
+    <MDXProvider>
+      <ThemeProvider
+        disableTransitionOnChange={false}
+        defaultTheme="system"
+        enableSystem={true}
+      >
+        {children}
+      </ThemeProvider>
+    </MDXProvider>
   );
 };
 
