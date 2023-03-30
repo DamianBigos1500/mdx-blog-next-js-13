@@ -29,9 +29,9 @@ const page = async ({ params }: { params: { slug: string } }) => {
           <span>Article read time: {readingTime} min</span>
         </div>
 
-        <div className={styles.blog_post__mdx}>
+        {/* <div className={styles.blog_post__mdx}>
           <MdxContent source={content} data={data} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
