@@ -3,10 +3,10 @@ import MdxContent from '@/components/mdxContent/MdxContent';
 import styles from '@/styles/components/posts/post.module.scss';
 import BlogPostHeader from '@/components/blogPost/BlogPostHeader';
 
-export const generateMetadata = async ({ params }: any) => {
-  const { data } = postsService.getPostBySlug(params.slug);
-  return { title: data.title };
-};
+// export const generateMetadata = async ({ params }: any) => {
+//   const { data } = postsService.getPostBySlug(params.slug);
+//   return { title: data.title };
+// };
 
 const page = async ({ params }: { params: { slug: string } }) => {
   const data = postsService.getPostBySlug(params.slug);
