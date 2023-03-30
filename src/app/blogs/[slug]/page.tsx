@@ -8,7 +8,6 @@ import { BlogPost } from '@/utils/types';
 
 export async function generateStaticParams() {
   const blogPosts: BlogPost[] = postsService.getPosts();
-
   return blogPosts.map((post) => ({
     slug: post.slug,
   }));
@@ -26,7 +25,6 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className={styles.blog_post__container}>
-      <div>{`${params.slug}`}</div>
       <BlogPostHeader
         src={data.imageUrl}
         title={data.title}

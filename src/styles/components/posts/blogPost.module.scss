@@ -29,6 +29,10 @@
     transition: transform 0.4s ease-out;
     clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
     z-index: 100;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+    text-overflow: ellipsis;
   }
 
   &__product_info {
@@ -36,27 +40,32 @@
     flex-direction: column;
     gap: 1rem;
     margin-top: 4rem;
+    margin-left: 5rem;
   }
 
   &__preparation_time {
     transition: opacity 0.2s ease-in;
-    transition-delay: 0.5s;
-    margin-left: 5rem;
+    transition-delay: 0.4s;
     opacity: 0;
   }
 
   &__description {
     transition: opacity 0.2s ease-in;
-    transition-delay: 0.5s;
-    margin-left: 5rem;
+    transition-delay: 0.4s;
     opacity: 0;
   }
 
   &__ingredients {
-    padding-left: 1rem;
     font-size: 0.8rem;
-    transition: opacity 0.2s ease-out, transform 0.2s ease-in;
+    transition: opacity 0.2s ease-out, margin 0.2s ease-in;
+    width: 100%;
+    margin-left: -4rem;
     margin-top: auto;
+    color: #7a7a7a;
+  }
+
+  &__images_wrapper {
+    cursor: pointer;
   }
 
   &__image {
@@ -66,7 +75,6 @@
     transition: transform 0.2s ease-out;
     perspective: 1500px;
     z-index: 5;
-    cursor: pointer;
   }
 
   &__image_second {
@@ -84,6 +92,7 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 1rem;
+    // transition: transform 0.4s ease-out, opacity 0.2s ease-out;
   }
 
   &__date {
@@ -100,30 +109,31 @@
   }
 
   &:hover {
-    & .post_card__title {
-      transform: translateY(-1.6rem) translateX(20rem);
-      clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
-    }
+    & .post_card {
+      &__title {
+        transform: translateY(-1.6rem) translateX(10rem);
+      }
 
-    & .post_card__image {
-      transform: perspective(40rem) translateY(0.2rem) scale(1.05)
-        rotateX(12deg) rotateY(20deg) rotateZ(-3deg);
-    }
+      &__image {
+        transform: perspective(40rem) translateY(0.2rem) scale(1.05)
+          rotateX(12deg) rotateY(20deg) rotateZ(-3deg);
+      }
 
-    & .post_card__preparation_time {
-      opacity: 1;
-    }
-    & .post_card__description {
-      opacity: 1;
-    }
+      &__preparation_time {
+        opacity: 1;
+      }
+      &__description {
+        opacity: 1;
+      }
 
-    & .post_card__ingredients {
-      transform: translateX(4rem);
-    }
+      &__ingredients {
+        margin-left: 0rem;
+      }
 
-    & .post_card__image_second {
-      opacity: 1;
-      animation: flipCard 1s forwards;
+      &__image_second {
+        opacity: 1;
+        animation: flipCard 1s forwards;
+      }
     }
   }
 
@@ -160,6 +170,86 @@
       background-size: 100% 100%;
       color: #fff;
       --t: 0.2s 0.1s;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .post_card {
+    display: flex;
+    flex-direction: column;
+
+    &__left {
+      flex-direction: column;
+    }
+
+    &__right {
+      flex-direction: row;
+    }
+
+    &__additional_info {
+      margin-top: 2rem;
+      flex-direction: row;
+    }
+
+    &__image {
+      transition: none !important;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    &__title {
+      top: calc(14rem);
+      left: 0;
+    }
+
+    &__product_info {
+      margin-left: 0rem;
+    }
+
+    &__preparation_time {
+      opacity: 1;
+    }
+
+    &__description {
+      opacity: 1;
+    }
+
+    &__ingredients {
+      margin-left: 0;
+    }
+
+    &__button {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      & .post_card__title {
+        transform: none !important;
+      }
+
+      & .post_card__image {
+        transform: none !important;
+      }
+
+      & .post_card__image_second {
+        opacity: 0;
+        transform: none !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .post_card {
+    &__right {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    &__button {
+      align-self: flex-end;
     }
   }
 }

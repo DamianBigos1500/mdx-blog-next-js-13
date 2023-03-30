@@ -14,10 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="">
-        <Header />
+      <body>
+        <main>
+          <Header />
 
-        <Providers>{children}</Providers>
+          <Providers>{children}</Providers>
+        </main>
       </body>
     </html>
   );

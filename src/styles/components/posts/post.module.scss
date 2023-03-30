@@ -23,7 +23,7 @@
 
     & .title {
       position: absolute;
-      padding: 1rem 2rem;
+      padding: 1rem 3rem;
       font-size: 3rem;
       bottom: 2rem;
       left: 10%;
@@ -39,10 +39,16 @@
     margin-bottom: 2rem;
   }
 
-  &__mdx {
+  &__mdx > * {
+    overflow-wrap: break-word;
   }
 
   &__content {
-    padding: 6rem calc(100vw - 90%);
+    display: flex;
+    flex-direction: column;
+    max-width: 90rem;
+    margin: 2rem auto;
+    padding: 0 calc(100vw - 90%);
+
   }
 }
