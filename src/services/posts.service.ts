@@ -22,19 +22,16 @@ const postsService = {
     return posts;
   },
 
-  getPostBySlug: (slug: string) => {
+  getPostBySlug: (slug: string): BlogPost => {
     const filePath = postFilesDir + '/' + slug + '.mdx';
     const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
 
     // const { data, content } = matter(fileContent);
     return {
-      // data: {
-      //   ...data,
-      //   publishedAt: dayjs(data.publishedAt).format('DD MMMM YYYY'),
-      // } as BlogPost['data'],
-      // content,
+      data: {} as BlogPost['data'],
+      content:'h',
       slug,
-      // readingTime: calculateReadingTime(content),
+      readingTime: calculateReadingTime('gvjb'),
     };
   },
 };
