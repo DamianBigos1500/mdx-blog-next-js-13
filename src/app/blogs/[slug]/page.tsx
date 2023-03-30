@@ -9,12 +9,13 @@ import BlogPostHeader from '@/components/blogPost/BlogPostHeader';
 // };
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  const data = postsService.getPostBySlug(params.slug);
+  // const data = postsService.getPostBySlug(params.slug);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className={styles.blog_post__container}>
+      asdasasd
       {/* <BlogPostHeader
         src={data.imageUrl}
         title={data.title}
