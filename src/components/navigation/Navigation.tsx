@@ -17,13 +17,13 @@ const Navigation: FC<NavigationProps> = ({}) => {
         </li>
 
         <li className={styles.nav__item}>
-          <Link href="/blog">About</Link>
+          <Link href="/blogs">About</Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="/blog">Explore</Link>
+          <Link href="/blogs">Explore</Link>
         </li>
         <li className={styles.nav__item}>
-          <Link href="/blog">Resume</Link>
+          <Link href="/blogs">Resume</Link>
         </li>
       </ul>
     </nav>
