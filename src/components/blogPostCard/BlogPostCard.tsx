@@ -1,5 +1,3 @@
-'use client';
-
 import { BlogPost } from '@/utils/types';
 import Link from 'next/link';
 import { FC } from 'react';
