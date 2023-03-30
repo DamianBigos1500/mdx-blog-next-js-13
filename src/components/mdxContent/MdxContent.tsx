@@ -7,7 +7,6 @@ interface MdxContentProps extends MDXRemoteProps {
 }
 
 const MdxContent = ({ data, ...props }: MdxContentProps) => {
-  console.log(props);
   return (
     <>
       {/* @ts-expect-error Async Server Component Workaround */}
