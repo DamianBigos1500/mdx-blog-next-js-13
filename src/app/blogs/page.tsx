@@ -5,14 +5,14 @@ import styles from '@/styles/components/posts/posts.module.scss';
 
 const page = () => {
   const blogPosts: BlogPost[] = postsService.getPosts();
+  console.log(blogPosts);
 
   return (
     <section className={styles.posts}>
       asdasdsd
-      {blogPosts.map((post: BlogPost) => (
-        <div key={post.slug}>{post.data.title}</div>
-        // <BlogPostCard key={post.slug} post={post} />
-      ))}
+      {/* {blogPosts.map((post: BlogPost) => (
+        <BlogPostCard key={post.slug} post={post} />
+      ))} */}
     </section>
   );
 };
