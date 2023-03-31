@@ -3,7 +3,7 @@ import MdxComponents from '../mdxComponents';
 import { BlogPost } from '@/utils/types';
 
 interface MdxContentProps extends MDXRemoteProps {
-  data: BlogPost['data'];
+  data: any;
 }
 
 const MdxContent = ({ data, ...props }: MdxContentProps) => {
