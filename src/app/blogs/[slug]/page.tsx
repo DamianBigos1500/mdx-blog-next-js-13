@@ -8,10 +8,10 @@ import { BlogPost } from '@/utils/types';
 
 export async function generateStaticParams() {
   const blogPosts: BlogPost[] = postsService.getPosts();
-  // return blogPosts.map((post) => ({
-  //   slug: post.slug,
-  // }));
-  return [];
+
+  return blogPosts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
 export const generateMetadata = async ({ params }: any) => {

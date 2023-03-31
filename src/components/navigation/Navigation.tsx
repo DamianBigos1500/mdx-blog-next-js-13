@@ -25,7 +25,7 @@ const Navigation = async () => {
         </li>
 
         <li className={styles.nav__item}>
-          <Link href="/blogs">About</Link>
+          <Link href="/about">About</Link>
         </li>
         {session ? (
           <li className={styles.nav__item}>
