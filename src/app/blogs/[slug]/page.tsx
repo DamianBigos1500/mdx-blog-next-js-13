@@ -12,10 +12,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export const generateMetadata = async ({ params }: any) => {
-  const { data } = postsService.getPostBySlug(params.slug);
-  return { title: data.title };
-};
+// export const generateMetadata = async ({ params }: any) => {
+// const { data } = postsService.getPostBySlug(params.slug);
+// return { title: data.title };
+// };
 
 const page = async ({ params }: { params: { slug: string } }) => {
   // const { data, content, readingTime } = postsService.getPostBySlug(
@@ -24,7 +24,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className={styles.blog_post__container}>
-      asasdasd
+    asdasd
       {/* <BlogPostHeader
         src={data.imageUrl}
         title={data.title}
