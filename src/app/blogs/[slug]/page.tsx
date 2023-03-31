@@ -1,5 +1,3 @@
-'server only';
-
 import postsService from 'src/services/posts.service';
 import MdxContent from '@/components/mdxContent/MdxContent';
 import styles from '@/styles/components/posts/post.module.scss';
@@ -20,13 +18,14 @@ export const generateMetadata = async ({ params }: any) => {
 };
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  const { data, content, readingTime } = postsService.getPostBySlug(
-    params.slug
-  );
+  // const { data, content, readingTime } = postsService.getPostBySlug(
+  //   params.slug
+  // );
 
   return (
     <div className={styles.blog_post__container}>
-      <BlogPostHeader
+      asasdasd
+      {/* <BlogPostHeader
         src={data.imageUrl}
         title={data.title}
         readingTime={readingTime}
@@ -41,7 +40,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
         <div className={styles.blog_post__mdx}>
           <MdxContent source={content} data={data} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
