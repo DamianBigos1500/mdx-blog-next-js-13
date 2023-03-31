@@ -10,7 +10,7 @@ const page = () => {
     <section className={styles.posts}>
       asdasdsd
       {blogPosts.map((post: BlogPost) => (
-        <div>{post.data.title}</div>
+        <div key={post.slug}>{post.data.title}</div>
         // <BlogPostCard key={post.slug} post={post} />
       ))}
     </section>
