@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/server/auth';
 import SignInGoogle from '../authButtons/signInGoogle/SignInGoogle';
 import SignOut from '../authButtons/signInGoogle/signOut/SignOut';
+import Image from 'next/image';
 
 const Navigation = async () => {
   const session = await getServerSession(authOptions);
@@ -29,6 +30,11 @@ const Navigation = async () => {
         </li>
         {session ? (
           <li className={styles.nav__item}>
+            <img
+              src={`${session.user.image}`}
+              style={{ width: '40px', height: '40px' }}
+              alt={''}
+            />
             <SignOut />
           </li>
         ) : (
