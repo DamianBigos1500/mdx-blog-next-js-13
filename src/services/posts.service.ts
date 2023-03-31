@@ -12,9 +12,11 @@ const postsService = {
     const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
 
     let posts: BlogPost[] = [];
-    dirFiles.map((file) => {
+    dirFiles.map(async (file) => {
       if (!file.name.endsWith('.mdx')) return;
-      const post = postsService.getPostBySlug(file.name.replace('.mdx', ''));
+      const post = await postsService.getPostBySlug(
+        file.name.replace('.mdx', '')
+      );
 
       posts.push(post);
     });
@@ -22,9 +24,11 @@ const postsService = {
     return posts;
   },
 
-  getPostBySlug: (slug: string): BlogPost => {
+  getPostBySlug: async (slug: string): Promise<BlogPost> => {
     const filePath = postFilesDir + '/' + slug + '.mdx';
-    const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
+    const fileContent = await fs.promises.readFile(filePath, {
+      encoding: 'utf-8',
+    });
 
     const { data, content } = matter(fileContent);
     return {
