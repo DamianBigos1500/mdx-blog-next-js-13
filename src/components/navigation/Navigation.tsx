@@ -7,7 +7,7 @@ import SignInGoogle from '../authButtons/signInGoogle/SignInGoogle';
 import SignOut from '../authButtons/signInGoogle/signOut/SignOut';
 
 const Navigation = async () => {
-  // const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
   return (
     <nav className={styles.nav}>
@@ -27,7 +27,7 @@ const Navigation = async () => {
         <li className={styles.nav__item}>
           <Link href="/blogs">About</Link>
         </li>
-        {/* {session ? (
+        {session ? (
           <li className={styles.nav__item}>
             <SignOut />
           </li>
@@ -35,7 +35,7 @@ const Navigation = async () => {
           <li className={styles.nav__item}>
             <SignInGoogle />
           </li>
-        )} */}
+        )}
       </ul>
     </nav>
   );

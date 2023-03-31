@@ -6,12 +6,13 @@ import styles from '@/styles/components/posts/post.module.scss';
 import BlogPostHeader from '@/components/blogPost/BlogPostHeader';
 import { BlogPost } from '@/utils/types';
 
-// export async function generateStaticParams() {
-//   const blogPosts: BlogPost[] = postsService.getPosts();
-//   return blogPosts.map((post) => ({
-//     slug: post.slug,
-//   }));
-// }
+export async function generateStaticParams() {
+  const blogPosts: BlogPost[] = postsService.getPosts();
+  // return blogPosts.map((post) => ({
+  //   slug: post.slug,
+  // }));
+  return [];
+}
 
 export const generateMetadata = async ({ params }: any) => {
   const { data } = postsService.getPostBySlug(params.slug);
