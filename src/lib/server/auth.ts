@@ -2,10 +2,29 @@ import { NextAuthOptions } from 'next-auth';
 import { db } from '@/lib/server/db';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import GoogleProvider from 'next-auth/providers/google';
+import GithubProvider from 'next-auth/providers/github';
 
 function getGoogleCredentials() {
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+  if (!clientId || clientId.length == 0) {
+    throw new Error('No clientId for google provider set');
+  }
+
+  if (!clientSecret || clientSecret.length == 0) {
+    throw new Error('No clientSecret for google provider set');
+  }
+
+  return {
+    clientId,
+    clientSecret,
+  };
+}
+
+function getGithubCredentials() {
+  const clientId = process.env.GITHUB_CLIENT_ID;
+  const clientSecret = process.env.GITHUB_CLIENT_SECRET;
 
   if (!clientId || clientId.length == 0) {
     throw new Error('No clientId for google provider set');
@@ -27,9 +46,18 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/login',
+    signIn: '/',
   },
-  providers: [GoogleProvider({ ...getGoogleCredentials() })],
+  providers: [
+    GoogleProvider({
+      clientId: getGoogleCredentials().clientId,
+      clientSecret: getGoogleCredentials().clientSecret,
+    }),
+    GithubProvider({
+      clientId: getGithubCredentials().clientId,
+      clientSecret: getGithubCredentials().clientSecret,
+    }),
+  ],
   callbacks: {
     async session({ token, session }) {
       if (token) {
@@ -61,7 +89,7 @@ export const authOptions: NextAuthOptions = {
       };
     },
     redirect() {
-      return '/blogs';
+      return '/';
     },
   },
 };

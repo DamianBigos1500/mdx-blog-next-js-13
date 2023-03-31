@@ -4,11 +4,14 @@ import rootDirectory from '@/utils/rootDirectory';
 import dayjs from 'dayjs';
 import fs from 'fs';
 import matter from 'gray-matter';
+import path from 'path';
 
 const postFilesDir = rootDirectory + '/src/data/posts';
 
 const postsService = {
   getPosts: (): BlogPost[] => {
+    console.log(path.resolve(__dirname), rootDirectory)
+
     const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
 
     let posts: BlogPost[] = [];

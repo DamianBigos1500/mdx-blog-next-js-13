@@ -11,6 +11,7 @@ const nextConfig = {
     appDir: true,
     mdxRs: true,
   },
+  debug: true,
 };
 
 export default withMDX(nextConfig);
