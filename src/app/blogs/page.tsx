@@ -4,8 +4,8 @@ import postsService from 'src/services/posts.service';
 import styles from '@/styles/components/posts/posts.module.scss';
 
 const page = () => {
-  const blogPosts: BlogPost[] = postsService.getPosts();
-  console.log(blogPosts);
+  // const blogPosts: BlogPost[] = postsService.getPosts();
+  // console.log(blogPosts);
 
   return (
     <section className={styles.posts}>
