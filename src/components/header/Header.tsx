@@ -1,10 +1,11 @@
+'use client';
+
 import Navigation from '../navigation/Navigation';
 
-const Header = () => {
+const Header = ({ currentUser }: any) => {
   return (
     <header>
-      {/* @ts-expect-error Server Component */}
-      <Navigation />
+      <Navigation  currentUser={currentUser}/>
     </header>
   );
 };

@@ -1,3 +1,5 @@
+'use client';
+
 import styles from '@/styles/components/navigation/navigation.module.scss';
 import Link from 'next/link';
 import ThemeToggle from '../themeToggle/ThemeToggle';
@@ -7,11 +9,7 @@ import SignInGoogle from '../authButtons/signInGoogle/SignInGoogle';
 import SignOut from '../authButtons/signInGoogle/signOut/SignOut';
 import getCurrentUser from '@/utils/getCurrentUser';
 
-const Navigation = async () => {
-  const session = await getCurrentUser();
-
-  console.log(session);
-
+const Navigation = ({ currentUser }: any) => {
   return (
     <nav className={styles.nav}>
       <Link href="/">
@@ -30,10 +28,10 @@ const Navigation = async () => {
         <li className={styles.nav__item}>
           <Link href="/about">About</Link>
         </li>
-        {session ? (
+        {currentUser ? (
           <li className={styles.nav__item}>
             <img
-              src={`${session.image}`}
+              src={`${currentUser.image}`}
               style={{ width: '40px', height: '40px' }}
               alt={''}
             />
