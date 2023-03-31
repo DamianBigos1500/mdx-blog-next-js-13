@@ -11,7 +11,7 @@ const Providers: FC<ProvidersProps> = ({ children }) => {
   return (
     <SessionProvider>
       <ThemeProvider
-        disableTransitionOnChange={false}
+        attribute="class"
         defaultTheme="system"
         enableSystem={true}
       >
