@@ -4,22 +4,24 @@ import styles from '@/styles/components/posts/post.module.scss';
 import BlogPostHeader from '@/components/blogPost/BlogPostHeader';
 import { BlogPost } from '@/utils/types';
 
-// should ebe dymanic because headers() is use in nav
-// export async function generateStaticParams() {
-//   const blogPosts: BlogPost[] = postsService.getPosts();
 
-//   return blogPosts.map((post) => ({
-//     slug: post.slug,
-//   }));
-// }
+export async function generateStaticParams() {
+  const blogPosts: BlogPost[] = postsService.getPosts();
 
-export const generateMetadata = async ({ params }: any) => {
-  const { data } = await postsService.getPostBySlug(params.slug);
+  return blogPosts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export const generateMetadata = ({ params }: any) => {
+  const { data } = postsService.getPostBySlug(params.slug);
   return { title: data.title };
 };
 
-const page = async ({ params }: { params: { slug: string } }) => {
-  const { data, content, readingTime } = await postsService.getPostBySlug(
+const page = ({ params }: { params: { slug: string } }) => {
+  
+
+  const { data, content, readingTime } = postsService.getPostBySlug(
     params.slug
   );
 
