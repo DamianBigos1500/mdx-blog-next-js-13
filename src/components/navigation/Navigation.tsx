@@ -5,12 +5,12 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/server/auth';
 import SignInGoogle from '../authButtons/signInGoogle/SignInGoogle';
 import SignOut from '../authButtons/signInGoogle/signOut/SignOut';
+import getCurrentUser from '@/utils/getCurrentUser';
 
 const Navigation = async () => {
-  let session;
-  try {
-    session = await getServerSession(authOptions);
-  } catch (error) {}
+  const session = await getCurrentUser();
+
+  console.log(session);
 
   return (
     <nav className={styles.nav}>
@@ -33,7 +33,7 @@ const Navigation = async () => {
         {session ? (
           <li className={styles.nav__item}>
             <img
-              src={`${session.user.image}`}
+              src={`${session.image}`}
               style={{ width: '40px', height: '40px' }}
               alt={''}
             />
