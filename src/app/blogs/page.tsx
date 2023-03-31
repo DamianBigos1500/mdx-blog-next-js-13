@@ -8,7 +8,6 @@ const page = async () => {
 
   return (
     <section className={styles.posts}>
-      asdasdsd
       {blogPosts.map((post: BlogPost) => (
         <BlogPostCard key={post.slug} post={post} />
       ))}

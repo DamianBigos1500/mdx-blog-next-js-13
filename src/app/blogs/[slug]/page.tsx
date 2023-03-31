@@ -3,27 +3,21 @@ import MdxContent from '@/components/mdxContent/MdxContent';
 import styles from '@/styles/components/posts/post.module.scss';
 import BlogPostHeader from '@/components/blogPost/BlogPostHeader';
 import { BlogPost } from '@/utils/types';
+import { headers } from 'next/headers';
 
-
-export async function generateStaticParams() {
-  const blogPosts: BlogPost[] = postsService.getPosts();
-
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-export const generateMetadata = ({ params }: any) => {
-  const { data } = postsService.getPostBySlug(params.slug);
-  return { title: data.title };
-};
+// export const generateMetadata = ({ params }: any) => {
+//   const { data } = postsService.getPostBySlug(params.slug);
+//   return { title: data.title };
+// };
 
 const page = ({ params }: { params: { slug: string } }) => {
-  
-
   const { data, content, readingTime } = postsService.getPostBySlug(
     params.slug
   );
+
+  const headersList = headers();
+  const referer = headersList.get('referer');
+  console.log(referer);
 
   return (
     <div className={styles.blog_post__container}>

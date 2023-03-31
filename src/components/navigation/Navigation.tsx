@@ -8,7 +8,6 @@ import SignOut from '../authButtons/signInGoogle/signOut/SignOut';
 
 const Navigation = async () => {
   const session = await getServerSession(authOptions);
-  // const { data: session } = useSession();
 
   return (
     <nav className={styles.nav}>
