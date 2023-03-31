@@ -1,11 +1,9 @@
-import { FC } from 'react';
 import Navigation from '../navigation/Navigation';
 
-interface HeaderProps {}
-
-const Header: FC<HeaderProps> = ({}) => {
+const Header = () => {
   return (
     <header>
+      {/* @ts-expect-error Server Component */}
       <Navigation />
     </header>
   );

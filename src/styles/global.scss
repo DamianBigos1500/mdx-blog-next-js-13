@@ -2,7 +2,8 @@
 
 :root {
   --bg-color-primary: #fff;
-  --bg-color-secondary: #dddddd99;
+  --bg-color-secondary: #e0e0e0;
+  --bg-color-tertiary: #dedede;
   --color-primary: #000;
   --color-secondary: #23cd4b;
   --color-main: #9be15d;
@@ -10,11 +11,15 @@
   --white: white;
   --nav-height: 4rem;
   --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+
+  //navbar
+  --hover-navbar :#222;
 }
 
 [data-theme='dark'] {
   --bg-color-primary: #555;
   --bg-color-secondary: #222;
+  --bg-color-tertiary: #282828;
   --color-primary: #fff;
 }
 

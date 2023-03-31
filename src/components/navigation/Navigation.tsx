@@ -1,10 +1,10 @@
-import { FC } from 'react';
 import styles from '@/styles/components/navigation/navigation.module.scss';
 import Link from 'next/link';
+import ThemeToggle from '../themeToggle/ThemeToggle';
+import { getServerSession } from 'next-auth';
 
-interface NavigationProps {}
+const Navigation = async () => {
 
-const Navigation: FC<NavigationProps> = ({}) => {
   return (
     <nav className={styles.nav}>
       <Link href="/">
@@ -12,7 +12,11 @@ const Navigation: FC<NavigationProps> = ({}) => {
       </Link>
 
       <ul className={styles.nav__links}>
-        <li className={styles.nav__item} style={{}}>
+        <div className={styles.nav__item}>
+          <ThemeToggle />
+        </div>
+
+        <li className={styles.nav__item}>
           <Link href="/blogs">Blogs</Link>
         </li>
 
