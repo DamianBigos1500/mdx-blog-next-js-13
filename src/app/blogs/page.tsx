@@ -3,15 +3,16 @@ import { BlogPost } from '@/utils/types';
 import postsService from 'src/services/posts.service';
 import styles from '@/styles/components/posts/posts.module.scss';
 
-const page =  () => {
-  // const blogPosts: BlogPost[] = postsService.getPosts();
+const page = () => {
+  const blogPosts: BlogPost[] = postsService.getPosts();
 
   return (
     <section className={styles.posts}>
       asdasdsd
-      {/* {blogPosts.map((post: BlogPost) => (
-        <BlogPostCard key={post.slug} post={post} />
-      ))} */}
+      {blogPosts.map((post: BlogPost) => (
+        <div>{post.data.title}</div>
+        // <BlogPostCard key={post.slug} post={post} />
+      ))}
     </section>
   );
 };
