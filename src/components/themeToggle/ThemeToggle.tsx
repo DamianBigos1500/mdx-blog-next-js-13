@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '../ui/DropdownMenu';
 import styles from '@/styles/components/themeToggle/themeToggle.module.scss';
-import Icons from '@/styles/components/icons/Icons';
+import Icons from '@/components/icons/Icons';
 
 interface ThemeToggleProps {}
 

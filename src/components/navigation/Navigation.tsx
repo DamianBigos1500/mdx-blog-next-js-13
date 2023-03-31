@@ -1,3 +1,5 @@
+'use client';
+
 import styles from '@/styles/components/navigation/navigation.module.scss';
 import Link from 'next/link';
 import ThemeToggle from '../themeToggle/ThemeToggle';
@@ -5,10 +7,12 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/server/auth';
 import SignInGoogle from '../authButtons/signInGoogle/SignInGoogle';
 import SignOut from '../authButtons/signInGoogle/signOut/SignOut';
+import { useSession } from 'next-auth/react';
 
-const Navigation = async () => {
-  const session = await getServerSession(authOptions);
-
+const Navigation = () => {
+  // const session = await getServerSession(authOptions);
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <nav className={styles.nav}>
       <Link href="/">
@@ -27,7 +31,7 @@ const Navigation = async () => {
         <li className={styles.nav__item}>
           <Link href="/about">About</Link>
         </li>
-        {/* {session ? (
+        {session ? (
           <li className={styles.nav__item}>
             <SignOut />
           </li>
@@ -35,7 +39,7 @@ const Navigation = async () => {
           <li className={styles.nav__item}>
             <SignInGoogle />
           </li>
-        )} */}
+        )}
       </ul>
     </nav>
   );

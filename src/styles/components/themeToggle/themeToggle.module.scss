@@ -22,20 +22,20 @@
       transition: all 0.8s;
     }
 
-    [data-theme='dark'] &_sun {
+    [class='dark'] &_sun {
       opacity: 1;
       transform: scale(1) rotate(180deg);
     }
-    [data-theme='light'] &_sun {
+    [class='light'] &_sun {
       opacity: 0;
       transform: scale(0) rotate(0deg);
     }
 
-    [data-theme='light'] &_moon {
+    [class='light'] &_moon {
       opacity: 1;
       transform: scale(1);
     }
-    [data-theme='dark'] &_moon {
+    [class='dark'] &_moon {
       opacity: 0;
       transform: scale(0);
     }
