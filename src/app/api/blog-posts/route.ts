@@ -3,8 +3,8 @@ import prisma from '@/lib/server';
 import main from 'prisma/seed';
 import postsService from 'src/services/posts.service';
 
-export async function GET() {
-  const posts = postsService.getPosts();
+// export async function GET() {
+//   const posts = postsService.getPosts();
 
   // for (let post of posts) {
     
@@ -28,14 +28,14 @@ export async function GET() {
   //   });
   // }
 
-  const blogs = await prisma.blogPost.findMany({
-    include: {
-      data: true,
-    },
-  });
+  // const blogs = await prisma.blogPost.findMany({
+  //   include: {
+  //     data: true,
+  //   },
+  // });
 
-  return NextResponse.json({ blogs: blogs });
-}
+//   return NextResponse.json({ blogs: blogs });
+// }
 
 // export async function POST() {
 //   return new Response(JSON.stringify({}));
