@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/DropdownMenu';
-import styles from '@/styles/components/themeToggle/ThemeToggle.module.scss';
+import styles from '@/styles/components/themeToggle/themeToggle.module.scss';
 import Icons from '@/styles/components/icons/Icons';
 
 interface ThemeToggleProps {}
