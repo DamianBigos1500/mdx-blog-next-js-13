@@ -24,7 +24,7 @@
     top: 1rem;
     left: 10vw;
     padding: 0.4rem 1.6rem;
-    font-size: 1.8rem;
+    font-size: 1.8em;
     background-image: var(--gradient-primary);
     transition: transform 0.4s ease-out;
     clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
@@ -178,6 +178,7 @@
   .post_card {
     display: flex;
     flex-direction: column;
+    font-size: 90%;
 
     &__left {
       flex-direction: column;
@@ -196,6 +197,9 @@
       transition: none !important;
       width: 100%;
       object-fit: cover;
+    }
+    &__image_second {
+      display: none;
     }
 
     &__title {
@@ -242,6 +246,8 @@
 
 @media screen and (max-width: 600px) {
   .post_card {
+    font-size: 80%;
+
     &__right {
       flex-direction: column;
       align-items: flex-start;
