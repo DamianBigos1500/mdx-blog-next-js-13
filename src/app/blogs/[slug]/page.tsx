@@ -23,10 +23,9 @@ const page = async ({ params }: { params: { slug: string } }) => {
       data: true,
     },
   });
-  
+
   if (!blogsBySlug || !blogsBySlug.data) return;
 
-  console.log(blogsBySlug);
   const readingTime = calculateReadingTime(blogsBySlug.content);
 
   const headersList = headers();
