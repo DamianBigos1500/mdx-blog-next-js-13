@@ -9,6 +9,7 @@ const SignInGoogle: FC = ({}) => {
   const loginHandler = async () => {
     await signIn('google');
   };
+
   const githubHandler = async () => {
     await signIn('github');
   };
@@ -16,7 +17,7 @@ const SignInGoogle: FC = ({}) => {
   return (
     <div>
       <button onClick={loginHandler}>Google</button>
-      <span onClick={githubHandler}>Github</span>
+      <button onClick={githubHandler}>Github</button>
     </div>
   );
 };

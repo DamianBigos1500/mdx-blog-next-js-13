@@ -4,3 +4,16 @@
   flex-direction: column;
   gap: 2rem;
 }
+
+@media screen and (max-width: 1200px) {
+  .posts {
+    padding: 6rem calc(100vw - 94%);
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .posts {
+    padding: 6rem calc(100vw - 96%);
+  }
+}

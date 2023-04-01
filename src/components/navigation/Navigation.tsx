@@ -3,11 +3,8 @@
 import styles from '@/styles/components/navigation/navigation.module.scss';
 import Link from 'next/link';
 import ThemeToggle from '../themeToggle/ThemeToggle';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/server/auth';
 import SignInGoogle from '../authButtons/signInGoogle/SignInGoogle';
 import SignOut from '../authButtons/signInGoogle/signOut/SignOut';
-import getCurrentUser from '@/utils/getCurrentUser';
 
 const Navigation = ({ currentUser }: any) => {
   return (
