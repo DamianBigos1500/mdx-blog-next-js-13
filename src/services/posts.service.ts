@@ -9,7 +9,20 @@ import path from 'path';
 const postFilesDir = rootDirectory + '/src/data/posts';
 
 const postsService = {
-  getPosts: async (): Promise<BlogPost[]> => {
+  getPaths: () => {
+    const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
+
+    let paths: any[] = [];
+
+    dirFiles.map((file) => {
+      if (!file.name.endsWith('.mdx')) return;
+      paths.push({ slug: file.name.replace('.mdx', '') });
+    });
+
+    return paths;
+  },
+
+  getPosts: (): BlogPost[] => {
     const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
 
     let posts: BlogPost[] = [];

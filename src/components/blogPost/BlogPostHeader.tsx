@@ -8,7 +8,11 @@ interface BlogPostHeaderProps {
   readingTime: number;
 }
 
-const BlogPostHeader: FC<BlogPostHeaderProps> = ({ src, title, readingTime }) => {
+const BlogPostHeader: FC<BlogPostHeaderProps> = ({
+  src,
+  title,
+  readingTime,
+}) => {
   return (
     <div className={styles.blog_post__header}>
       <Image

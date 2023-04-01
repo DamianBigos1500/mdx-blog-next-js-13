@@ -1,8 +1,8 @@
-import postsService from 'src/services/posts.service';
 import MdxContent from '@/components/mdxContent/MdxContent';
 import styles from '@/styles/components/posts/post.module.scss';
 import BlogPostHeader from '@/components/blogPost/BlogPostHeader';
-import { headers } from 'next/headers';
+import { blogPostService } from 'src/services/blogPost.service';
+import { BlogPost } from '@/utils/types';
 
 // export const generateMetadata = ({ params }: any) => {
 //   const { data } = postsService.getPostBySlug(params.slug);
@@ -10,12 +10,11 @@ import { headers } from 'next/headers';
 // };
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  const { data, content, readingTime } = postsService.getPostBySlug(
+  const blogPost: BlogPost | null = await blogPostService.getBlogPostBySlug(
     params.slug
   );
-
-  const headersList = headers();
-  const referer = headersList.get('referer');
+  if (!blogPost) return;
+  const { data, readingTime, content } = blogPost;
 
   return (
     <div className={styles.blog_post__container}>

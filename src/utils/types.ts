@@ -1,15 +1,24 @@
 export interface BlogPost {
-  data: {
-    title: string;
-    imageUrl: string;
-    secondImageUrl: string;
-    blurhash: string;
-    preparationTime: string;
-    description: string;
-    ingredients: string[];
-    publishedAt: string;
-  };
+  id?: string;
+  data: BlogPostData;
   content: string;
-  readingTime: number;
   slug: string;
+  readingTime: number;
+}
+
+export interface BlogPostData {
+  id?: string;
+  title: string;
+  imageUrl: string;
+  secondImageUrl: string;
+  blurhash: string;
+  preparationTime: string;
+  description: string;
+  ingredients: Ingredients[];
+  publishedAt: string;
+}
+
+export interface Ingredients {
+  id?: string;
+  name: string;
 }

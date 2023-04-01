@@ -1,21 +1,16 @@
 import BlogPostCard from '@/components/blogPostCard/BlogPostCard';
-import { BlogPost } from '@/utils/types';
-import postsService from 'src/services/posts.service';
 import styles from '@/styles/components/posts/posts.module.scss';
-import ClientOnly from '@/components/oncyClient/onlyClient';
-import getPrismaPosts from 'src/services/prismaposts';
+import { blogPostService } from 'src/services/blogPost.service';
+import { BlogPost } from '@/utils/types';
 
 const page = async () => {
-
-  const blogPrisma = await getPrismaPosts();
+  const blogPosts: BlogPost[] = await blogPostService.getBlogPosts();
 
   return (
     <section className={styles.posts}>
-      <ClientOnly>
-        {blogPrisma.map((post: any) => (
-          <BlogPostCard key={post.slug} post={post} />
-        ))}
-      </ClientOnly>
+      {blogPosts.map((post: any) => (
+        <BlogPostCard key={post.slug} post={post} />
+      ))}
     </section>
   );
 };

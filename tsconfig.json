@@ -31,6 +31,6 @@
       "@/mdxComponents/*": ["src/components/mdxComponents/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "prisma/seed.ts"],
   "exclude": ["node_modules"]
 }
