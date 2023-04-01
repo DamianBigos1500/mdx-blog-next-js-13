@@ -9,11 +9,12 @@ export default async function getPrismaPosts() {
     //     data: true,
     //   },
     // });
-    const blogPosts: BlogPost[] = postsService.getPosts();
+    const blogPosts: BlogPost[] = await postsService.getPosts();
 
     return blogPosts.map((post: any) => {
       return post;
     });
+
   } catch (error: any) {
     throw new Error(error);
   }
