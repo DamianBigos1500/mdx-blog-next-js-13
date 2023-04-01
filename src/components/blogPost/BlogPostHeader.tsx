@@ -1,22 +1,12 @@
 import Image from 'next/image';
-import { FC } from 'react';
 import styles from '@/styles/components/posts/post.module.scss';
-import { getPlaiceholder } from 'plaiceholder';
-import getImageBlur from '@/utils/getImageBlur';
 
 interface BlogPostHeaderProps {
   src: string;
   title: string;
-  blurhash: string;
 }
 
-const BlogPostHeader = async ({
-  src,
-  title,
-  blurhash,
-}: BlogPostHeaderProps) => {
-  const base64 = await getImageBlur();
-
+const BlogPostHeader = ({ src, title }: BlogPostHeaderProps) => {
   return (
     <div className={styles.blog_post__header}>
       <Image
@@ -24,8 +14,6 @@ const BlogPostHeader = async ({
         alt=""
         width={1920}
         height={1080}
-        placeholder="blur"
-        blurDataURL={base64}
         className={styles.image}
       />
       <div className={styles.title}>{title}</div>

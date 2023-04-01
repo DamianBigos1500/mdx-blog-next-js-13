@@ -18,12 +18,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className={styles.blog_post__container}>
-      {/* @ts-expect-error */}
-      <BlogPostHeader
-        src={data.imageUrl}
-        title={data.title}
-        blurhash={data.blurhash}
-      />
+      <BlogPostHeader src={data.imageUrl} title={data.title} />
 
       <div className={styles.blog_post__content}>
         <div className={styles.blog_post__time}>
