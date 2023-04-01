@@ -18,10 +18,11 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className={styles.blog_post__container}>
+      {/* @ts-expect-error */}
       <BlogPostHeader
         src={data.imageUrl}
         title={data.title}
-        readingTime={readingTime}
+        blurhash={data.blurhash}
       />
 
       <div className={styles.blog_post__content}>
