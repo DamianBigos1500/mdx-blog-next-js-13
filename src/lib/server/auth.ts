@@ -52,10 +52,12 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: getGoogleCredentials().clientId,
       clientSecret: getGoogleCredentials().clientSecret,
+      allowDangerousEmailAccountLinking: true,
     }),
     GithubProvider({
       clientId: getGithubCredentials().clientId,
       clientSecret: getGithubCredentials().clientSecret,
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
   callbacks: {

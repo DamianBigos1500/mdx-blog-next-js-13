@@ -7,11 +7,19 @@ const SignInGoogle: FC = ({}) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const loginHandler = async () => {
-    await signIn('google');
+    try {
+      await signIn('google');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const githubHandler = async () => {
-    await signIn('github');
+    try {
+      await signIn('github');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
