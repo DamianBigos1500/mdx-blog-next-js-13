@@ -6,7 +6,7 @@ import ClientOnly from '@/components/oncyClient/onlyClient';
 import getPrismaPosts from 'src/services/prismaposts';
 
 const page = async () => {
-  const blogPosts: BlogPost[] = postsService.getPosts();
+  // const blogPosts: BlogPost[] = postsService.getPosts();
   const blogPrisma = await getPrismaPosts();
 
   return (
