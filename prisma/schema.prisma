@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-provider = "sqlite"
-  url      = "file:./dev.db"
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -60,19 +60,19 @@ model BlogPost {
   id      String       @id @default(cuid())
   data    BlogPostData @relation(fields: [dataId], references: [id])
   dataId  String       @unique
-  content String       
-  slug    String       
+  content String       @db.Text
+  slug    String       @db.Text
 }
 
 model BlogPostData {
   id              String       @id @default(cuid())
-  title           String       
-  imageUrl        String       
-  secondImageUrl  String       
-  blurhash        String       
-  preparationTime String       
-  description     String       
-  publishedAt     String       
+  title           String       @db.Text
+  imageUrl        String       @db.Text
+  secondImageUrl  String       @db.Text
+  blurhash        String       @db.Text
+  preparationTime String       @db.Text
+  description     String       @db.Text
+  publishedAt     String       @db.Text
   BlogPost        BlogPost[]
   ingredients     Ingredient[]
 }

@@ -1,0 +1,60 @@
+.dropdown__trigger {
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+.dropdown__trigger:hover {
+  background: var(--bg-color-tertiary);
+}
+.dropdown__theme {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.dropdown__theme_moon {
+  position: absolute;
+  transition: all 0.8s;
+}
+.dropdown__theme_sun {
+  transition: all 0.8s;
+}
+[class=dark] .dropdown__theme_sun {
+  opacity: 1;
+  transform: scale(1) rotate(180deg);
+}
+[class=light] .dropdown__theme_sun {
+  opacity: 0;
+  transform: scale(0) rotate(0deg);
+}
+[class=light] .dropdown__theme_moon {
+  opacity: 1;
+  transform: scale(1);
+}
+[class=dark] .dropdown__theme_moon {
+  opacity: 0;
+  transform: scale(0);
+}
+.dropdown__content {
+  min-width: 10rem;
+  background: var(--bg-color-tertiary);
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.dropdown__item {
+  width: 100%;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  outline: none;
+  border-radius: 0.5rem;
+}
+.dropdown__item_icon {
+  margin-right: 0.4rem;
+}
+.dropdown__item:hover {
+  background: var(--bg-color-secondary);
+}/*# sourceMappingURL=themeToggle.module.css.map */
