@@ -2,9 +2,10 @@ import BlogPostCard from '@/components/blogPostCard/BlogPostCard';
 import styles from '@/styles/components/posts/posts.module.scss';
 import { blogPostService } from 'src/services/blogPost.service';
 import { BlogPost } from '@/utils/types';
+import postsService from 'src/services/posts.service';
 
 const page = async () => {
-  const blogPosts: BlogPost[] = await blogPostService.getBlogPosts();
+  const blogPosts: any[] = postsService.getPosts();
 
   return (
     <section className={styles.posts}>

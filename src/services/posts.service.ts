@@ -22,23 +22,37 @@ const postsService = {
     return paths;
   },
 
-  getPosts: (): BlogPost[] => {
+  getPosts: () => {
     const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
 
-    let posts: BlogPost[] = [];
-    dirFiles.map((file) => {
+    let posts = [];
+
+    const data = dirFiles.map((file) => {
+      // console.log(file.name);
       if (!file.name.endsWith('.mdx')) return;
-      const post = postsService.getPostBySlug(file.name.replace('.mdx', ''));
 
-      posts.push(post);
+      const fileContent = fs.readFileSync(
+        postFilesDir + '/' + file.name,
+        'utf8'
+      );
+      const matterResult = matter(fileContent);
+      // const fileContent = fs.readFileSync(file, 'utf8');
+
+      // const post = postsService.getPostBySlug(file.name.replace('.mdx', ''));
+
+      return {
+        ...matterResult,
+        readingTime: calculateReadingTime(matterResult.content),
+      };
     });
+    console.log(data[0]);
 
-    return posts;
+    return data;
   },
 
   getPostBySlug: (slug: string): BlogPost => {
     const filePath = postFilesDir + '/' + slug + '.mdx';
-    const fileContent = fs.readFileSync(filePath, { encoding: 'utf-8' });
+    const fileContent = fs.readFileSync(filePath, 'utf8');
 
     const { data, content } = matter(fileContent);
     return {
