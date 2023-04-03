@@ -14,7 +14,7 @@ import Icons from '@/components/icons/Icons';
 interface ThemeToggleProps {}
 
 const ThemeToggle: FC<ThemeToggleProps> = ({}) => {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   return (
     <>
@@ -28,6 +28,7 @@ const ThemeToggle: FC<ThemeToggleProps> = ({}) => {
         <DropdownMenuContent
           align="end"
           forceMount
+          sideOffset={5}
           className={styles.dropdown__content}
         >
           <DropdownMenuItem

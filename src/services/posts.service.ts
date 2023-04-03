@@ -4,7 +4,6 @@ import rootDirectory from '@/utils/rootDirectory';
 import dayjs from 'dayjs';
 import fs from 'fs';
 import matter from 'gray-matter';
-import path from 'path';
 
 const postFilesDir = rootDirectory + '/src/data/posts';
 
