@@ -18,7 +18,7 @@ const BlogPostCard: FC<BlogPostCardProps> = ({ post }) => {
   let blogLink = `/blogs/${post.slug}`;
 
   return (
-    <div className={styles.post_card}>
+    <div className={`${styles.post_card} shadow`}>
       <div className={styles.post_card__left}>
         <div className={styles.post_card__title}>
           <Link href={blogLink}>{post.data.title}</Link>

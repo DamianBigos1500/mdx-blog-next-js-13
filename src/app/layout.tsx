@@ -1,7 +1,6 @@
 import Providers from '@/components/providers/Providers';
 import Header from '@/components/header/Header';
 import '@/styles/global.scss';
-import getCurrentUser from '@/utils/getCurrentUser';
 
 export const metadata = {
   title: 'Create Next App',
