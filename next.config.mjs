@@ -11,6 +11,9 @@ const nextConfig = {
     appDir: true,
     mdxRs: true,
   },
+  images: {
+    domains: ['avatars.githubusercontent.com'],
+  },
 };
 
 export default withMDX(nextConfig);

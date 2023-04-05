@@ -7,11 +7,10 @@ import SignInModal from '../signInModal/SignInModal';
 import UserInfo from '../userInfo/UserInfo';
 import { FC, useState } from 'react';
 import MobileNavbar from '../mobileNavbar/MobileNavbar';
-import { User } from 'next-auth';
 import { navItems } from '@/data/navItems';
 
 interface MobileNavbarProps {
-  currentUser: User;
+  currentUser: any | null;
 }
 
 const Navigation: FC<MobileNavbarProps> = ({ currentUser }: any) => {
@@ -36,7 +35,7 @@ const Navigation: FC<MobileNavbarProps> = ({ currentUser }: any) => {
 
           {/* Links */}
           {navItems.map((item) => (
-            <li className={styles.nav__item}>
+            <li key={item.name} className={styles.nav__item}>
               <Link href={item.href}>{item.name}</Link>
             </li>
           ))}
