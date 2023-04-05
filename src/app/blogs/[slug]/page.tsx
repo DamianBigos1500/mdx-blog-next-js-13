@@ -22,8 +22,8 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
       <div className={styles.blog_post__content}>
         <div className={styles.blog_post__time}>
-          <span>Meal preparation time: {data.preparationTime} min</span>
-          <span>Article read time: {readingTime} min</span>
+          <span>Preparation time: {data.preparationTime} min</span>
+          <span>Read time: {readingTime} min</span>
         </div>
 
         <div className={styles.blog_post__mdx}>
