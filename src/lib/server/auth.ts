@@ -1,13 +1,28 @@
-import { AuthOptions, NextAuthOptions } from 'next-auth';
+import { NextAuthOptions } from 'next-auth';
 import { db } from '@/lib/server/db';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import prisma from '@/lib/server';
+import bcrypt from 'bcrypt';
+
+function checkCredentialsExistance(id?: string, secret?: string) {
+  if (!id || id.length == 0) {
+    throw new Error('No clientId for google provider set');
+  }
+
+  if (!secret || secret.length == 0) {
+    throw new Error('No clientSecret for google provider set');
+  }
+  return;
+}
 
 function getGoogleCredentials() {
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+  checkCredentialsExistance(clientId, clientSecret);
 
   if (!clientId || clientId.length == 0) {
     throw new Error('No clientId for google provider set');
@@ -46,9 +61,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
-  pages: {
-    signIn: '/',
-  },
+
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -59,13 +72,24 @@ export const authOptions: NextAuthOptions = {
           placeholder: 'CORPNET',
           value: 'CORPNET',
         },
-        username: { label: 'Username', type: 'text ', placeholder: 'jsmith' },
+        email: { label: 'Username', type: 'text ', placeholder: 'jsmith' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
-        const user = { id: '1', name: 'J Smith', email: 'jsmith@example.com' };
+        if (!credentials?.password || !credentials.email) {
+          return null;
+        }
 
-        if (user) {
+        const user = await prisma.user.findFirst({
+          where: {
+            email: credentials?.email,
+          },
+        });
+        console.log(user);
+
+        if (user && user.password) {
+          bcrypt.compare(credentials.password, user.password);
+
           // Any object returned will be saved in `user` property of the JWT
           return user;
         } else {
@@ -122,25 +146,3 @@ export const authOptions: NextAuthOptions = {
     },
   },
 };
-
-// export const authOptions: AuthOptions = {
-//   adapter: PrismaAdapter(db),
-//   providers: [
-//     GithubProvider({
-//       clientId: process.env.GITHUB_ID as string,
-//       clientSecret: process.env.GITHUB_SECRET as string,
-//     }),
-//     GoogleProvider({
-//       clientId: process.env.GOOGLE_CLIENT_ID as string,
-//       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-//     }),
-//   ],
-//   pages: {
-//     signIn: '/',
-//   },
-//   debug: process.env.NODE_ENV === 'development',
-//   session: {
-//     strategy: 'jwt',
-//   },
-//   secret: process.env.NEXTAUTH_SECRET,
-// };

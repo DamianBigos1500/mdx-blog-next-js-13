@@ -41,7 +41,7 @@
     padding: 1rem;
     border: 1px solid var(--silver-grey);
     background: var(--bg-color-secondary);
-    width: 400px;
+    width: min(400px, 90vw);
 
     &[data-state='open'] {
       animation: fadeIn 50ms ease-out;
