@@ -1,10 +1,12 @@
+import getCurrentUser from '@/utils/getCurrentUser';
 import Navigation from '../navigation/Navigation';
 
-const Header = () => {
+const Header = async () => {
+  const currentUser = await getCurrentUser();
+
   return (
     <header>
-      {/* @ts-expect-error Server Component */}
-      <Navigation />
+      <Navigation currentUser={currentUser} />
     </header>
   );
 };

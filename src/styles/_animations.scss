@@ -33,3 +33,22 @@
     transform: translateY(1rem);
   }
 }
+
+@keyframes moveRight {
+  from {
+    transform: translateX(6rem);
+  }
+  to {
+    transform: translateX(0rem);
+  }
+}
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    display: none;
+    transform: translateX(6rem);
+  }
+}

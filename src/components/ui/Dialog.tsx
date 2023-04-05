@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  ComponentPropsWithoutRef,
-  ElementRef,
-  HTMLAttributes,
-  forwardRef,
-} from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { Check, ChevronRight, Circle } from 'lucide-react';
 
 const Dialog = DialogPrimitive.Root;
 const DialogTrigger = DialogPrimitive.Trigger;

@@ -1,3 +1,5 @@
+@import '../../animations';
+
 .nav {
   background-color: var(--bg-color-secondary);
   height: var(--nav-height);
@@ -6,6 +8,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+
+  &__right {
+    display: flex;
+    height: 100%;
+  }
 
   &__logo {
     display: flex;
@@ -26,10 +34,26 @@
     list-style: none;
   }
 
+  &__toggle_theme {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+  }
+
   &__item {
     display: block;
     position: relative;
     transition: 0.1s ease-out color;
+  }
+
+  &__menu_toggle {
+    position: absolute;
+    z-index: 1001;
+    display: none;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
   }
 
   &__item::before {
@@ -51,4 +75,55 @@
     transform-origin: left;
     // transform: scaleX(1);
   }
+
+  &__mobile {
+    display: none;
+  }
+
+  &__mobile_nav {
+    display: none;
+  }
 }
+
+@media screen and (max-width: 600px) {
+  .nav {
+    &__links {
+      display: none;
+    }
+
+    &__mobile_nav {
+      display: flex;
+    }
+  }
+}
+
+// @media screen and (max-width: 600px) {
+//   .nav {
+//     &__links {
+//       position: fixed;
+//       z-index: 1000;
+//       inset: 0 0 0 30%;
+//       background: hsla(0, 0%, 100%, 0.15);
+//       backdrop-filter: blur(0.1rem);
+
+//       flex-direction: column;
+//       align-items: flex-start;
+
+//       padding: min(10rem) 2rem;
+//     }
+
+//     &__links[menu-toggled='true'] {
+//       animation: fadeIn 500ms forwards, moveRight 500ms forwards;
+//     }
+
+//     &__links[menu-toggled='false'] {
+//       animation: fadeOut 500ms forwards, moveLeft 500ms forwards;
+//     }
+
+//     &__menu_toggle {
+//       position: absolute;
+//       z-index: 1001;
+//       display: flex;
+//     }
+//   }
+// }

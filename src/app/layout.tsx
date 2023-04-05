@@ -12,12 +12,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
       <body>
         <main>
           <Providers>
+            {/* @ts-expect-error Server Component */}
             <Header />
             {children}
           </Providers>

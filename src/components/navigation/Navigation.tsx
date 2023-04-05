@@ -1,12 +1,25 @@
+'use client';
+
 import styles from '@/styles/components/navigation/navigation.module.scss';
 import Link from 'next/link';
 import ThemeToggle from '../themeToggle/ThemeToggle';
-import getCurrentUser from '@/utils/getCurrentUser';
 import SignInModal from '../signInModal/SignInModal';
 import UserInfo from '../userInfo/UserInfo';
+import { FC, useState } from 'react';
+import MobileNavbar from '../mobileNavbar/MobileNavbar';
+import { User } from 'next-auth';
+import { navItems } from '@/data/navItems';
 
-const Navigation = async () => {
-  const currentUser = await getCurrentUser();
+interface MobileNavbarProps {
+  currentUser: User;
+}
+
+const Navigation: FC<MobileNavbarProps> = ({ currentUser }: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleMenuOpen = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <nav className={`${styles.nav} shadow`}>
@@ -14,28 +27,36 @@ const Navigation = async () => {
         <span className={styles.nav__logo}>D</span>
       </Link>
 
-      <ul className={styles.nav__links}>
-        <div className={styles.nav__item}>
-          <ThemeToggle />
+      <div className={styles.nav__right}>
+        <ul className={styles.nav__links}>
+          {/* Theme toggle */}
+          <li className={styles.nav__item}>
+            <ThemeToggle />
+          </li>
+
+          {/* Links */}
+          {navItems.map((item) => (
+            <li className={styles.nav__item}>
+              <Link href={item.href}>{item.name}</Link>
+            </li>
+          ))}
+
+          {/* User */}
+          {currentUser ? (
+            <li className={styles.nav__item}>
+              <UserInfo currentUser={currentUser} />
+            </li>
+          ) : (
+            <li className={styles.nav__item}>
+              <SignInModal />
+            </li>
+          )}
+        </ul>
+
+        <div className={styles.nav__mobile_nav}>
+          <MobileNavbar currentUser={currentUser} />
         </div>
-
-        <li className={styles.nav__item}>
-          <Link href="/blogs">Blogs</Link>
-        </li>
-
-        <li className={styles.nav__item}>
-          <Link href="/about">About</Link>
-        </li>
-        {currentUser ? (
-          <li className={styles.nav__item}>
-            <UserInfo currentUser={currentUser} />
-          </li>
-        ) : (
-          <li className={styles.nav__item}>
-            <SignInModal />
-          </li>
-        )}
-      </ul>
+      </div>
     </nav>
   );
 };
