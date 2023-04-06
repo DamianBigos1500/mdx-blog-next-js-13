@@ -1,6 +1,5 @@
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc';
 import MdxComponents from '../mdxComponents';
-import { BlogPost } from '@/utils/types';
 
 interface MdxContentProps extends MDXRemoteProps {
   data: any;
@@ -8,10 +7,10 @@ interface MdxContentProps extends MDXRemoteProps {
 
 const MdxContent = ({ data, ...props }: MdxContentProps) => {
   return (
-    <>
+    <div id="mdx-content">
       {/* @ts-expect-error Async Server Component Workaround */}
       <MDXRemote {...props} components={MdxComponents} />;
-    </>
+    </div>
   );
 };
 

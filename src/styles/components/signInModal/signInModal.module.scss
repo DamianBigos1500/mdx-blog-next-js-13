@@ -4,6 +4,10 @@
   &__triger {
     color: var(--white);
     font-size: inherit;
+    width: 100%;
+    display: flex;
+    padding-left: 3rem;
+    align-items: flex-start;
     background: inherit;
     padding: 0.2rem 0.4rem;
     border: transparent;
@@ -49,6 +53,14 @@
 
     &[data-state='closed'] {
       animation: fadeOut 50ms ease-in;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dialog {
+    &__triger {
+      background: inherit;
     }
   }
 }

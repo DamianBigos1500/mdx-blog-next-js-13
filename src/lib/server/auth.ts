@@ -113,9 +113,12 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ token, session }) {
+      console.log(token);
+
       if (token) {
         session.user.id = token.id;
         session.user.name = token.name;
+        session.user.surname = token.surname;
         session.user.email = token.email;
         session.user.image = token.picture;
       }
@@ -137,6 +140,7 @@ export const authOptions: NextAuthOptions = {
       return {
         id: dbUser.id,
         name: dbUser.name,
+        surname: dbUser.surname,
         email: dbUser.email,
         picture: dbUser.image,
       };

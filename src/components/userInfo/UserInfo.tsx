@@ -7,6 +7,7 @@ import {
   DropdownMenuTrigger,
 } from '../ui/DropdownMenu';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface UserInfoProps {
   currentUser: any;
@@ -22,10 +23,11 @@ const UserInfo: FC<UserInfoProps> = ({ currentUser }) => {
           width={40}
           height={40}
           style={{ width: '40px', height: '40px' }}
-          alt={''}
+          alt={currentUser.email + ' profile image'}
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent className={styles.user_info__content}>
+        <Link href="/profile">Profile</Link>
         <SignOut />
       </DropdownMenuContent>
     </DropdownMenu>

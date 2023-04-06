@@ -3,6 +3,7 @@ import styles from '@/styles/components/posts/post.module.scss';
 import BlogPostHeader from '@/components/blogPost/BlogPostHeader';
 import { blogPostService } from 'src/services/blogPost.service';
 import { BlogPost } from '@/utils/types';
+import PostOptions from '@/components/postOptions/PostOptions';
 
 // export const generateMetadata = ({ params }: any) => {
 //   const { data } = postsService.getPostBySlug(params.slug);
@@ -16,11 +17,15 @@ const page = async ({ params }: { params: { slug: string } }) => {
   if (!blogPost) return;
   const { data, readingTime, content } = blogPost;
 
+
+
   return (
-    <div className={styles.blog_post__container}>
+    <section className={styles.blog_post__container}>
       <BlogPostHeader src={data.imageUrl} title={data.title} />
 
       <div className={styles.blog_post__content}>
+        <PostOptions content={content} />
+
         <div className={styles.blog_post__time}>
           <span>Preparation time: {data.preparationTime} min</span>
           <span>Read time: {readingTime} min</span>
@@ -30,7 +35,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
           <MdxContent source={content} data={data} />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

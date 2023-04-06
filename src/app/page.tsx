@@ -3,9 +3,8 @@ import styles from '@/styles/components/home/homePage.module.scss';
 import Link from 'next/link';
 
 export default async function Home() {
-
   return (
-    <header className={styles.home}>
+    <div className={styles.home}>
       <div>
         <Image
           src={'/cake-1971552.jpg'}
@@ -20,6 +19,6 @@ export default async function Home() {
       <Link className={styles.header__button} href={'/blogs'}>
         <span>Read</span>
       </Link>
-    </header>
+    </div>
   );
 }

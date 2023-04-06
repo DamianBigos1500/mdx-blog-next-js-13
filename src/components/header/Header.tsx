@@ -3,6 +3,7 @@ import Navigation from '../navigation/Navigation';
 
 const Header = async () => {
   const currentUser = await getCurrentUser();
+  console.log(currentUser);
 
   return (
     <header>
