@@ -8,18 +8,13 @@ import UserInfo from '../userInfo/UserInfo';
 import { FC, useState } from 'react';
 import MobileNavbar from '../mobileNavbar/MobileNavbar';
 import { navItems } from '@/data/navItems';
+import { User } from '@/utils/types';
 
 interface MobileNavbarProps {
-  currentUser: any | null;
+  currentUser: User | null;
 }
 
-const Navigation: FC<MobileNavbarProps> = ({ currentUser }: any) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleMenuOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
+const Navigation: FC<MobileNavbarProps> = ({ currentUser }) => {
   return (
     <nav className={`${styles.nav} shadow`}>
       <Link href="/">
@@ -47,7 +42,7 @@ const Navigation: FC<MobileNavbarProps> = ({ currentUser }: any) => {
             </li>
           ) : (
             <li className={styles.nav__item}>
-              <SignInModal />
+              <SignInModal getOpenValue={null} />
             </li>
           )}
         </ul>
