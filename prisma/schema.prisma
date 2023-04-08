@@ -54,7 +54,7 @@ model User {
   updatedAt     DateTime     @updatedAt
   accounts      Account[]
   sessions      Session[]
-  LikedBlogs    LikedBlogs[]
+  likedBlogs    LikedBlogs[]
 }
 
 model VerificationToken {

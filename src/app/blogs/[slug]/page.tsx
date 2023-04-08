@@ -28,16 +28,16 @@ const page = async ({ params }: { params: { slug: string } }) => {
       where: {
         email: currentUser?.email,
       },
-      include: {
-        likedBlogs: true,
-      },
+      // include: {
+      //   likedBlogs: true,
+      // },
     });
 
-    isPinned = likedUserBlogs?.likedBlogs?.find(
-      (liked) => liked.blogPostSlug === blogPost.slug
-    )
-      ? true
-      : false;
+    // isPinned = likedUserBlogs?.likedBlogs?.find(
+    //   (liked) => liked.blogPostSlug === blogPost.slug
+    // )
+    //   ? true
+    //   : false;
   }
   // if(user?.likedBlogs.)
 
