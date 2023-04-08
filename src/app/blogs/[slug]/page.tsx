@@ -24,13 +24,14 @@ const page = async ({ params }: { params: { slug: string } }) => {
   let isPinned = false;
 
   if (currentUser) {
-    const likedUserBlogs = await prisma.user
-      .findFirst({
-        where: {
-          email: currentUser?.email,
-        },
-      })
-      .likedBlogs();
+    const likedUserBlogs = await prisma.user.findFirst({
+      where: {
+        email: currentUser?.email,
+      },
+      include: {
+        likedBlogs: true,
+      },
+    }).likedBlogs;
 
     isPinned = likedUserBlogs?.find(
       (liked) => liked.blogPostSlug === blogPost.slug
