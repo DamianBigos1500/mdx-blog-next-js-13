@@ -54,7 +54,7 @@ model User {
   updatedAt     DateTime     @updatedAt
   accounts      Account[]
   sessions      Session[]
-  likedBlogs    LikedBlogs[]
+  likedBlogs    pinnedBlogs[]
 }
 
 model VerificationToken {
@@ -95,7 +95,7 @@ model Ingredient {
   @@index([blogPostId])
 }
 
-model LikedBlogs {
+model pinnedBlogs {
   id           String @id @default(cuid())
   blogPostSlug String
   userId       String
