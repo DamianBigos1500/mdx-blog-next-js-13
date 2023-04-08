@@ -30,7 +30,33 @@ a {
   box-shadow: 4px 8px 8px hsla(0, 0%, 0%, 0.185);
 }
 
-.error_text{
+.error_text {
   color: red;
   font-size: 0.8rem;
+}
+
+.form {
+  margin: 1rem 0;
+  & > .title {
+  }
+
+  & > .group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    & > label {
+      position: absolute;
+    }
+
+    & > input {
+      width: 100%;
+      background: transparent;
+      border: 2px solid gray;
+      font-size: 1rem;
+      border-radius: 6px;
+      outline: none;
+      padding: 0.2rem 0.4rem;
+    }
+  }
 }

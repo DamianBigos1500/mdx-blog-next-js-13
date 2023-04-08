@@ -28,11 +28,12 @@ const page = async ({ params }: { params: { slug: string } }) => {
           },
         },
       });
-      console.log(likedUserBlogs)
       if (likedUserBlogs) pinnedId = likedUserBlogs.id;
     }
   } catch (error) {
   }
+
+  // const downloadPdf
 
   return (
     <section className={styles.blog_post__container}>
@@ -41,6 +42,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
       <div className={styles.blog_post__content}>
         <PostOptions
           content={content}
+          data={data}
           pinnedId={pinnedId}
           blogSlug={blogPost.slug}
         />

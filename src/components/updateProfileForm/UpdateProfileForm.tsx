@@ -40,7 +40,7 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
     }
 
     try {
-      await axios.post('http://localhost:3000/api/update-profile', formData);
+      await axios.post('api/update-profile', formData);
     } catch (error: any) {
       if (error.response.data) setErrors(error.response.data.errors);
     }

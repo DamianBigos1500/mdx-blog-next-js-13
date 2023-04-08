@@ -8,6 +8,7 @@ import {
 } from '../ui/Dialog';
 import SignInProviders from '../authButtons/signInGoogle/SignInProviders';
 import styles from '@/styles/components/signInModal/signInModal.module.scss';
+import SignInForm from '../signInForm/SignInForm';
 
 interface SignInModalProps {
   getOpenValue: ((e: boolean) => void) | null;
@@ -28,6 +29,7 @@ const SignInModal: FC<SignInModalProps> = ({ getOpenValue }) => {
       <DialogPortal className={styles.dialog__portal}>
         <DialogOverlay className={styles.dialog__overlay} />
         <DialogContent className={styles.dialog__content}>
+          <SignInForm />
           <SignInProviders />
         </DialogContent>
       </DialogPortal>

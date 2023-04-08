@@ -8,18 +8,23 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
-import { PDFDownloadLink } from '@react-pdf/renderer';
 import PDFFile from '../PDF/PDFFile';
 import Icons from '../icons/Icons';
 import axios from '@/lib/axios';
 
 interface PostOptionsProps {
   content: string;
+  data: any;
   pinnedId?: string;
   blogSlug: string;
 }
 
-const PostOptions: FC<PostOptionsProps> = ({ pinnedId, blogSlug }) => {
+const PostOptions: FC<PostOptionsProps> = ({
+  pinnedId,
+  blogSlug,
+  content,
+  data,
+}) => {
   const [isLiked, setIsLiked] = useState(pinnedId ? true : false);
 
   const clickPin = async () => {
@@ -57,7 +62,7 @@ const PostOptions: FC<PostOptionsProps> = ({ pinnedId, blogSlug }) => {
         <DropdownMenuTrigger>Open download</DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem className={styles.dropdown__item}>
-            <PDFDownloadLink document={<PDFFile/>} fileName='download'>Download PDF</PDFDownloadLink>
+            <span onClick={downloadHandle}>Download PDF</span>
           </DropdownMenuItem>
           <DropdownMenuItem className={styles.dropdown__item}>
             <span>Download PDF No images</span>
