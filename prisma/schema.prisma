@@ -54,7 +54,7 @@ model User {
   updatedAt     DateTime     @updatedAt
   accounts      Account[]
   sessions      Session[]
-  likedBlogs    LikedBlogs[]
+  LikedBlogs    LikedBlogs[]
 }
 
 model VerificationToken {
@@ -101,6 +101,6 @@ model LikedBlogs {
   userId       String
   user         User   @relation(fields: [userId], references: [id])
 
-  @@index([userId])
   @@unique(fields: [blogPostSlug, userId], name: "like_identifier")
+  @@index([userId])
 }
