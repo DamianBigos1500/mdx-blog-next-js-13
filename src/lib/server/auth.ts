@@ -85,7 +85,6 @@ export const authOptions: NextAuthOptions = {
             email: credentials?.email,
           },
         });
-        console.log(user);
 
         if (user && user.password) {
           bcrypt.compare(credentials.password, user.password);
@@ -113,7 +112,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ token, session }) {
-      console.log(token);
 
       if (token) {
         session.user.id = token.id;

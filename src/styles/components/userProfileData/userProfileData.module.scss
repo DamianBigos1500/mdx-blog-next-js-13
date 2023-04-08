@@ -1,6 +1,6 @@
 .user_profile {
   display: flex;
-  margin: 2rem 2rem;
+  margin-top: 2rem;
   border-radius: 1rem;
   overflow: hidden;
 
@@ -11,24 +11,36 @@
       var(--color-secondary),
       var(--color-main)
     );
-    padding: 3rem 2rem;
+    padding: 2vw;
     text-align: center;
   }
 
   &__right {
     width: 65%;
     background: var(--bg-color-secondary);
-    padding: 3rem 2rem;
+    padding: 2vw 2rem;
+    word-break: break-word;
   }
 
   &__image {
     margin-bottom: 1rem;
     border-radius: 1rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: min(20rem, 100%);
+    // min-w: 200px;
   }
 
   &__information {
     font-size: 2rem;
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__edit_icon {
+    cursor: pointer;
   }
 
   &__profile_information {
@@ -38,7 +50,7 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 768px) {
   .user_profile {
     display: flex;
     flex-direction: column;

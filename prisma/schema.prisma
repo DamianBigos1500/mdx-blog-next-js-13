@@ -29,6 +29,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -37,20 +38,23 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
   surname       String?
-  email         String?   @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
   password      String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   accounts      Account[]
   sessions      Session[]
+  likedBlogs    LikedBlogs[]
 }
 
 model VerificationToken {
@@ -87,10 +91,16 @@ model Ingredient {
   name       String
   blogPostId String
   blogPost   BlogPostData @relation(fields: [blogPostId], references: [id])
+
+  @@index([blogPostId])
 }
 
-// model FavouritReceipe {
-//   id         String       @id @default(cuid())
-//   blogPostId String
-//   blogPost   BlogPostData @relation(fields: [blogPostId], references: [id])
-// }
+model LikedBlogs {
+  id           String @id @default(cuid())
+  blogPostSlug String
+  userId       String
+  user         User   @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@unique(fields: [blogPostSlug, userId], name: "like_identifier")
+}

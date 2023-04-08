@@ -1,0 +1,10 @@
+.post_options {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  
+  &__pin {
+    display: flex;
+    align-items: center;
+  }
+}

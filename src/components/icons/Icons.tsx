@@ -5,6 +5,10 @@ import {
   Sun,
   Laptop,
   Menu,
+  Pencil,
+  X,
+  Pin,
+  PinOff,
 } from 'lucide-react';
 
 export const Icons = {
@@ -14,6 +18,10 @@ export const Icons = {
   Moon,
   Laptop,
   Menu,
+  Pencil,
+  X,
+  Pin,
+  PinOff,
 };
 
 export default Icons;
