@@ -1,10 +1,8 @@
-import { NextResponse } from 'next/server';
-import prisma from '@/lib/server';
+// import { NextResponse } from 'next/server';
+// import prisma from '@/lib/server';
 
-export async function GET() {
-  const users = await prisma.likedBlogs.findMany({});
+// export async function GET() {
+//   const users = await prisma.pinnedBlogs.findMany({});
 
-  return NextResponse.json({ data: users });
-}
-
-
+//   return NextResponse.json({ data: users });
+// }

@@ -14,21 +14,24 @@ const page = async ({ params }: { params: { slug: string } }) => {
   if (!blogPost) return;
   const { data, readingTime, content } = blogPost;
 
-  const currentUser = await getCurrentUser();
-
   let pinnedId = '';
+  try {
+    const currentUser = await getCurrentUser();
 
-  if (currentUser) {
-    // get id of pinnedBlog
-    const likedUserBlogs = await prisma.likedBlogs.findUnique({
-      where: {
-        like_identifier: {
-          blogPostSlug: blogPost.slug,
-          userId: currentUser.id,
+    if (currentUser) {
+      // get id of pinnedBlog
+      const likedUserBlogs = await prisma.pinnedBlogs.findUnique({
+        where: {
+          like_identifier: {
+            blogPostSlug: blogPost.slug,
+            userId: currentUser.id,
+          },
         },
-      },
-    });
-    if (likedUserBlogs) pinnedId = likedUserBlogs.id;
+      });
+      console.log(likedUserBlogs)
+      if (likedUserBlogs) pinnedId = likedUserBlogs.id;
+    }
+  } catch (error) {
   }
 
   return (

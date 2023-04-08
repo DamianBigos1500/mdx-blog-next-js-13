@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await prisma.likedBlogs.delete({
+    await prisma.pinnedBlogs.delete({
       where: {
         id: body.pinnedId,
       },

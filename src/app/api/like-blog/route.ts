@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await prisma.likedBlogs.upsert({
+    await prisma.pinnedBlogs.upsert({
       where: {
         like_identifier: {
           blogPostSlug: body.blogSlug,
