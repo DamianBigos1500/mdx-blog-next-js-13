@@ -31,9 +31,9 @@ const page = async ({ params }: { params: { slug: string } }) => {
       include: {
         likedBlogs: true,
       },
-    }).likedBlogs;
+    });
 
-    isPinned = likedUserBlogs?.find(
+    isPinned = likedUserBlogs?.likedBlogs?.find(
       (liked) => liked.blogPostSlug === blogPost.slug
     )
       ? true
