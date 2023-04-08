@@ -5,9 +5,7 @@ import { getServerSession } from 'next-auth';
 
 export async function GET() {
   const users = await prisma.user.findMany({
-    include: {
-      likedBlogs: true,
-    },
+    // include: { likedBlogs: true },
   });
 
   return NextResponse.json({ data: users });
