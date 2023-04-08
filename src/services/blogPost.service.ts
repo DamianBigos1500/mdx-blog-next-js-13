@@ -32,6 +32,7 @@ export const blogPostService = {
 
   getBlogPostBySlug: async (slug: string) => {
     try {
+      console.log('here');
       const blogPost = await prisma.blogPost.findFirst({
         where: {
           slug: slug,
@@ -57,6 +58,7 @@ export const blogPostService = {
         readingTime: calculateReadingTime(blogPost.content),
       };
     } catch (error: any) {
+      console.log(error);
       throw new Error(error);
     }
   },

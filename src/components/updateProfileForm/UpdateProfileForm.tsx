@@ -24,6 +24,7 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrors([]);
 
     const formData = {
       email: currentUser.email,

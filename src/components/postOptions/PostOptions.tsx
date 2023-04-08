@@ -11,18 +11,44 @@ import {
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import PDFFile from '../PDF/PDFFile';
 import Icons from '../icons/Icons';
+import axios from '@/lib/axios';
 
 interface PostOptionsProps {
   content: string;
-  isPinned?: boolean;
+  pinnedId?: string;
+  blogSlug: string;
 }
 
-const PostOptions: FC<PostOptionsProps> = ({ isPinned }) => {
-  const [isLiked, setIsLiked] = useState(isPinned);
+const PostOptions: FC<PostOptionsProps> = ({ pinnedId, blogSlug }) => {
+  const [isLiked, setIsLiked] = useState(pinnedId ? true : false);
+
+  const clickPin = async () => {
+    console.log('here');
+
+    if (isLiked) {
+      setIsLiked(false);
+      try {
+        await axios.post('/api/unlike-blog', {
+          pinnedId: pinnedId,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setIsLiked(true);
+      try {
+        await axios.post('/api/like-blog', {
+          blogSlug: blogSlug,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <div className={styles.post_options}>
-      <span className={styles.post_options__pin}>
+      <span className={styles.post_options__pin} onClick={clickPin}>
         {!isLiked ? <span>Save</span> : <span>Unsave</span>}
         {!isLiked ? <Icons.Pin /> : <Icons.PinOff />}
       </span>

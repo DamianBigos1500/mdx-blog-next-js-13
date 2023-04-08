@@ -7,11 +7,6 @@ import PostOptions from '@/components/postOptions/PostOptions';
 import prisma from '@/lib/server';
 import getCurrentUser from '@/utils/getCurrentUser';
 
-// export const generateMetadata = ({ params }: any) => {
-//   const { data } = postsService.getPostBySlug(params.slug);
-//   return { title: data.title };
-// };
-
 const page = async ({ params }: { params: { slug: string } }) => {
   const blogPost: BlogPost | null = await blogPostService.getBlogPostBySlug(
     params.slug
@@ -21,53 +16,31 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
   const currentUser = await getCurrentUser();
 
-  let isPinned = false;
+  let pinnedId = '';
 
   if (currentUser) {
-    const likedUserBlogs = await prisma.user.findFirst({
+    // get id of pinnedBlog
+    const likedUserBlogs = await prisma.likedBlogs.findUnique({
       where: {
-        email: currentUser?.email,
+        like_identifier: {
+          blogPostSlug: blogPost.slug,
+          userId: currentUser.id,
+        },
       },
-      // include: {
-      //   likedBlogs: true,
-      // },
     });
-
-    // isPinned = likedUserBlogs?.likedBlogs?.find(
-    //   (liked) => liked.blogPostSlug === blogPost.slug
-    // )
-    //   ? true
-    //   : false;
+    if (likedUserBlogs) pinnedId = likedUserBlogs.id;
   }
-  // if(user?.likedBlogs.)
-
-  // if (user != null) {
-  //   const like = await prisma.likedBlogs.upsert({
-  //     where: {
-  //       like_identifier: {
-  //         blogPostSlug: blogPost.slug,
-  //         userId: user.id,
-  //       },
-  //     },
-  //     update: {},
-  //     create: {
-  //       blogPostSlug: blogPost.slug,
-  //       user: {
-  //         connect: {
-  //           id: user.id,
-  //         },
-  //       },
-  //     },
-  //   });
-  //   console.log(like);
-  // }
 
   return (
     <section className={styles.blog_post__container}>
       <BlogPostHeader src={data.imageUrl} title={data.title} />
 
       <div className={styles.blog_post__content}>
-        <PostOptions content={content} isPinned={isPinned} />
+        <PostOptions
+          content={content}
+          pinnedId={pinnedId}
+          blogSlug={blogPost.slug}
+        />
 
         <div className={styles.blog_post__time}>
           <span>Preparation time: {data.preparationTime} min</span>

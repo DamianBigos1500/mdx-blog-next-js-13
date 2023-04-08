@@ -14,28 +14,18 @@ export async function POST(request: Request) {
   }
 
   if (!session) {
-    return NextResponse.json({ message: 'success', user: session });
+    return NextResponse.json({ message: 'error' });
   }
 
   try {
-    await prisma.likedBlogs.upsert({
+    await prisma.likedBlogs.delete({
       where: {
-        like_identifier: {
-          blogPostSlug: body.blogSlug,
-          userId: session.user.id,
-        },
-      },
-      update: {},
-      create: {
-        blogPostSlug: body.blogSlug,
-        user: {
-          connect: {
-            id: session.user.id,
-          },
-        },
+        id: body.pinnedId,
       },
     });
-  } catch (error) {}
+  } catch (error) {
+    return NextResponse.json({ message: 'error' });
+  }
 
-  return NextResponse.json({ message: 'success' });
+  return NextResponse.json({ message: 'success', user: session });
 }

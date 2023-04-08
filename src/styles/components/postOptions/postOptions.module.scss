@@ -6,5 +6,8 @@
   &__pin {
     display: flex;
     align-items: center;
+    border: solid 2px gray;
+    border-radius: 0.6rem;
+    padding: 0.3rem 0.5rem;
   }
 }
