@@ -30,8 +30,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
       });
       if (likedUserBlogs) pinnedId = likedUserBlogs.id;
     }
-  } catch (error) {
-  }
+  } catch (error) {}
 
   // const downloadPdf
 

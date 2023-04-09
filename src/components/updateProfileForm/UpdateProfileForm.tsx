@@ -3,16 +3,25 @@
 import { User } from '@/utils/types';
 import { FC, FormEvent, useRef, useState } from 'react';
 import styles from '@/styles/components/updateProfileForm/updateProfileForm.module.scss';
-import axios from '@/lib/axios';
+// import axios from '@/lib/axios';
 import { useRouter } from 'next/navigation';
 import { Validate } from 'src/class/Validate';
 import { updateProfileRules } from '@/data/validationRules/validationRules';
+import useImageFileReader from 'src/hooks/useImageFileReader';
+import Axios from 'axios';
 
 interface UpdateProfileFormProps {
   currentUser: User;
   setIsEditMode: (e: boolean) => void;
   setServerResponse: any;
 }
+
+export const axiosFormData = Axios.create({
+  headers: {
+    'X-Requested-With': 'XMLHttpRequest',
+  },
+  withCredentials: true,
+});
 
 const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
   currentUser,
@@ -23,19 +32,29 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
   const nameRef = useRef<HTMLInputElement>(null);
   const surnameRef = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState<any>();
+  const [loading, setLoading] = useState(false);
+  const [handleImage, image, imageInput] = useImageFileReader();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors([]);
     setServerResponse(null);
 
-    const formData = {
+    const validateData = {
       email: currentUser.email,
       name: nameRef.current?.value,
       surname: surnameRef.current?.value,
     };
 
-    const validated = new Validate(formData, updateProfileRules);
+    const validated = new Validate(validateData, updateProfileRules);
+
+    const formData = new FormData();
+    formData.append('email', currentUser.email!);
+    formData.append('name', nameRef.current?.value!);
+    formData.append('surname', surnameRef.current?.value!);
+    if (imageInput) {
+      formData.append('image', imageInput);
+    }
 
     if (validated.hasError) {
       setErrors(validated.errors);
@@ -43,7 +62,7 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
     }
 
     try {
-      await axios.post('api/update-profile', formData);
+      await axiosFormData.patch('api/update-profile-pages', formData);
       setServerResponse({ message: 'Settings updated succesfully', code: 200 });
     } catch (error: any) {
       if (error.response.status === 422) {
@@ -51,14 +70,22 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
       }
       setServerResponse({ message: 'Could not update settings', code: 500 });
     }
-    setIsEditMode(false);
 
+    setIsEditMode(false);
     router.refresh();
   };
 
   return (
     <form onSubmit={handleSubmit} className="form">
+      {/* <img src={currentUser }  handleImage/> */}
+
       <div className="form_groups">
+        <div className={'group'}>
+          <input type="file" onChange={handleImage} />
+          <label>Input</label>
+          {image && <img src={image} style={{ width: '100px' }} />}
+        </div>
+
         <div className={'group'}>
           <input defaultValue={currentUser.email!} disabled />
           <label>Email</label>

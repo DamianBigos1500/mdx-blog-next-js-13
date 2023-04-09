@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const baseUrl = 'https://mdx-blog-next-js-13.vercel.app/';
+const baseUrl = 'http://localhost:3000/';
 
 const option = {};
 

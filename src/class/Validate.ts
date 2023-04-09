@@ -67,7 +67,6 @@ export class Validate {
     }
     // validate confirmed
     else if (restriction === 'confirmed') {
-
       if (body[key] !== body['password_confirmation'])
         return 'Confirmation password does not match';
     }

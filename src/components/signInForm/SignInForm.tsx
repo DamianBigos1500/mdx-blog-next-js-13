@@ -62,14 +62,19 @@ const SignInForm: FC<SignInFormProps> = ({}) => {
     //login
     try {
       const result = await signIn('credentials', {
-        redirect: true,
+        redirect: false,
         email: enteredEmail,
         password: enteredPassword,
       });
 
       console.log(result);
+      if (result?.error) {
+        setServerResponse({ message: 'Invalid credentials ', code: 401 });
+        return;
+      }
       setServerResponse({ message: 'Logged in succesfully', code: 200 });
     } catch (error) {
+      console.log(error);
       setServerResponse({ message: 'Could not log you in', code: 200 });
     }
 
