@@ -22,6 +22,7 @@
 
   &__content {
     position: fixed;
+    height: 100vh;
     z-index: 1000;
     inset: 0 0 0 30%;
     background: hsla(0, 0%, 100%, 0.15);
@@ -67,8 +68,21 @@
   &__user {
     margin: 1rem;
     border-radius: 15px;
-    padding: 1rem;
+    padding: 0.4rem;
     background: var(--bg-color-secondary);
+    overflow: hidden;
+  }
+
+  &__user_data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  &__user_image {
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   &__sign_in {

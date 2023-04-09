@@ -11,7 +11,7 @@ export class Validate {
     for ([key, value] of Object.entries(restrictions)) {
       if (value.length > 0) {
         for (let restriction of value) {
-          const error = this.checkValidity(key, body[key], restriction);
+          const error = this.checkValidity(key, body, key, restriction);
           if (error) {
             errorObject.set([key], error);
             break;
@@ -28,22 +28,29 @@ export class Validate {
 
   checkValidity(
     fieldName: string,
-    value: string,
+    body: any,
+    key: string,
+
     restriction: string
   ): string | null {
+    // validate required
     if (restriction === 'required') {
-      if (!value) return 'The ' + fieldName + ' field is required';
-    } else if (restriction.slice(0, 4) === 'min:') {
+      if (!body[key]) return 'The ' + fieldName + ' field is required';
+    }
+    // validate min
+    else if (restriction.slice(0, 4) === 'min:') {
       const minValue: number = Number(restriction.slice(4));
 
-      if (value.length < minValue)
+      if (body[key].length < minValue)
         return (
           'The ' + fieldName + ' must be at least ' + minValue + ' characters'
         );
-    } else if (restriction.slice(0, 4) === 'max:') {
+    }
+    // validate max
+    else if (restriction.slice(0, 4) === 'max:') {
       const maxValue: number = Number(restriction.slice(4));
 
-      if (value.length > maxValue)
+      if (body[key].length > maxValue)
         return (
           'Field ' +
           fieldName +
@@ -51,6 +58,18 @@ export class Validate {
           maxValue +
           ' characters'
         );
+    }
+    // validate email
+    else if (restriction === 'email') {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(body[key]))
+        return null;
+      return 'This is not valid email';
+    }
+    // validate confirmed
+    else if (restriction === 'confirmed') {
+
+      if (body[key] !== body['password_confirmation'])
+        return 'Confirmation password does not match';
     }
 
     return null;

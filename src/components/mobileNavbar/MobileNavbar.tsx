@@ -15,6 +15,8 @@ import Icons from '../icons/Icons';
 import SignInModal from '../signInModal/SignInModal';
 import { User } from '@/utils/types';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+import { signOut } from 'next-auth/react';
 
 interface MobileNavbarProps {
   currentUser: User | null;
@@ -62,12 +64,34 @@ const MobileNavbar: FC<MobileNavbarProps> = ({ currentUser }) => {
 
             <div className={styles.mobile_nav__user}>
               {currentUser ? (
-                <span>User Name: {currentUser.name}</span>
+                <>
+                  <Link
+                    href={'/profile'}
+                    className={styles.mobile_nav__user_data}
+                  >
+                    <Image
+                      className={styles.mobile_nav__user_image}
+                      src={currentUser.image!}
+                      alt={'Profile image'}
+                      width={60}
+                      height={60}
+                    />
+                    <span>
+                      <span>{currentUser?.name} </span>
+                      <span>{currentUser?.surname}</span>
+                    </span>
+
+                    <span
+                      onClick={() => {
+                        signOut();
+                      }}
+                    >
+                      <Icons.LogOut />
+                    </span>
+                  </Link>
+                </>
               ) : (
-                <div
-                  className={styles.mobile_nav__sign_in}
-                  onClick={() => console.log('asdasd')}
-                >
+                <div className={styles.mobile_nav__sign_in}>
                   <SignInModal getOpenValue={getSignInOpenValue} />
                 </div>
               )}

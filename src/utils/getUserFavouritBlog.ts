@@ -7,6 +7,9 @@ export default async function getUserFavouritBlog() {
 
     const fav = await prisma.user.findFirst({
       where: { email: user?.email },
+      include: {
+        likedBlogs: true,
+      },
     });
 
     console.log(fav);

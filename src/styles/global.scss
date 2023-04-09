@@ -30,23 +30,36 @@ a {
   box-shadow: 4px 8px 8px hsla(0, 0%, 0%, 0.185);
 }
 
-.error_text {
-  color: red;
-  font-size: 0.8rem;
-}
 
 .form {
-  margin: 1rem 0;
-  & > .title {
+  margin: 0 0 1rem 0;
+
+  &_groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
-  & > .group {
+  & .title {
+    margin-bottom: 1rem;
+  }
+
+  & .group {
     display: flex;
     flex-direction: column;
     position: relative;
 
     & > label {
       position: absolute;
+      top: 1.2rem;
+      left: 1rem;
+      transform: translateY(-50%);
+      padding: 0.2rem;
+      border-radius: 1rem;
+      background-color: transparent;
+      transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in,
+        background-color 200ms ease-in;
+      cursor: text;
     }
 
     & > input {
@@ -56,7 +69,19 @@ a {
       font-size: 1rem;
       border-radius: 6px;
       outline: none;
-      padding: 0.2rem 0.4rem;
+      padding: 0.4rem 1rem;
+
+      &::placeholder {
+        color: transparent;
+      }
+
+      &:focus ~ label,
+      &:not(:placeholder-shown) ~ label {
+        top: 0;
+        left: 0.5rem;
+        font-size: 0.8rem;
+        background-color: var(--bg-color-secondary);
+      }
     }
   }
 }

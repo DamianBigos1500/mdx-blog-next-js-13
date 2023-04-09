@@ -41,9 +41,12 @@
     margin-bottom: 2rem;
   }
 
+  &__mdx {
+    overflow: hidden;
+  }
+
   &__mdx > * {
     overflow-wrap: break-word;
-    color: aquamarine;
   }
 
   &__content {

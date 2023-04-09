@@ -12,7 +12,7 @@ const nextConfig = {
     mdxRs: true,
   },
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    domains: ['avatars.githubusercontent.com', 'images.pexels.com'],
   },
 };
 

@@ -3,7 +3,7 @@ import { authOptions } from '@/lib/server/auth';
 import { getServerSession } from 'next-auth';
 import prisma from '@/lib/server';
 import { Validate } from 'src/class/Validate';
-import { updateProfileRules } from '@/data/validationRules/updateProfileRules';
+import { updateProfileRules } from '@/data/validationRules/validationRules';
 
 export async function POST(request: Request) {
   const body = await request.json();
