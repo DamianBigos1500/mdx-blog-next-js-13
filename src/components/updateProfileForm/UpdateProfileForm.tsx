@@ -46,7 +46,6 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
     if (imageInput) {
       formData.append('file', imageInput);
       formData.append('upload_preset', 'next-blog');
-      formData.append('return_delete_token', 'true');
     }
 
     try {
