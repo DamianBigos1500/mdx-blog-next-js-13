@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { Validate } from 'src/class/Validate';
 import { updateProfileRules } from '@/data/validationRules/validationRules';
 import useImageFileReader from 'src/hooks/useImageFileReader';
+import axios from '@/lib/axios';
 import Axios from 'axios';
 
 interface UpdateProfileFormProps {
@@ -15,13 +16,6 @@ interface UpdateProfileFormProps {
   setIsEditMode: (e: boolean) => void;
   setServerResponse: any;
 }
-
-export const axiosFormData = Axios.create({
-  headers: {
-    'X-Requested-With': 'XMLHttpRequest',
-  },
-  withCredentials: true,
-});
 
 const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
   currentUser,
@@ -40,7 +34,7 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
     setErrors([]);
     setServerResponse(null);
 
-    const validateData = {
+    let validateData: any = {
       email: currentUser.email,
       name: nameRef.current?.value,
       surname: surnameRef.current?.value,
@@ -49,11 +43,36 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
     const validated = new Validate(validateData, updateProfileRules);
 
     const formData = new FormData();
-    formData.append('email', currentUser.email!);
-    formData.append('name', nameRef.current?.value!);
-    formData.append('surname', surnameRef.current?.value!);
     if (imageInput) {
-      formData.append('image', imageInput);
+      formData.append('file', imageInput);
+      formData.append('upload_preset', 'next-blog');
+      formData.append('return_delete_token', 'true');
+    }
+
+    try {
+      const imgRes: any = await Axios.post(
+        'https://api.cloudinary.com/v1_1/doqevddgq/image/upload',
+        formData
+      );
+
+      if (imgRes.data.url) {
+        validateData.image = imgRes.data.url;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    // delete old image
+    try {
+      const imgRes: any = await Axios.post(
+        'https://api.cloudinary.com/v1_1/doqevddgq/image/delete',
+        formData
+      );
+
+      if (imgRes.data.url) {
+        validateData.image = imgRes.data.url;
+      }
+    } catch (error) {
+      console.log(error);
     }
 
     if (validated.hasError) {
@@ -62,7 +81,7 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
     }
 
     try {
-      await axiosFormData.patch('api/update-profile-pages', formData);
+      await axios.post('api/update-profile', validateData);
       setServerResponse({ message: 'Settings updated succesfully', code: 200 });
     } catch (error: any) {
       if (error.response.status === 422) {

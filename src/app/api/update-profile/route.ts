@@ -10,14 +10,9 @@ export async function POST(request: Request) {
   const validated = new Validate(body, updateProfileRules);
 
   if (validated.hasError) {
-    return new Response(
-      JSON.stringify({
-        errors: validated.errors,
-      }),
-      {
-        status: 422,
-      }
-    );
+    return new Response(JSON.stringify({ errors: validated.errors }), {
+      status: 422,
+    });
   }
 
   let session;
@@ -31,6 +26,11 @@ export async function POST(request: Request) {
     throw new Error('This email does not belong to you');
   }
 
+  let newImg = {};
+  if (body.image) {
+    newImg = { image: body.image };
+  }
+
   const updatedUser = await prisma.user.update({
     where: {
       email: session.user.email!,
@@ -38,9 +38,33 @@ export async function POST(request: Request) {
     data: {
       name: body.name,
       surname: body.surname,
+      ...newImg,
     },
   });
   console.log(updatedUser);
 
   return NextResponse.json({ message: 'success', user: updatedUser });
 }
+
+const regex = /\/v\d+\/([^/]+)\.\w{3,4}$/;
+
+const cloudinaryUrl =
+  'https://res.cloudinary.com/your_cloud_name/image/upload/v1234567890/public_id.jpg';
+
+const getPublicIdFromUrl = (url: string) => {
+  const match = url.match(regex);
+  return match ? match[1] : null;
+};
+
+const publicId = getPublicIdFromUrl(cloudinaryUrl);
+
+const generateSHA1 = (data: any) => {
+  const hash = crypto.createHash('sha1');
+  hash.update(data);
+  return hash.digest('hex');
+};
+
+const generateSignature = (publicId: string, apiSecret: string) => {
+  const timestamp = new Date().getTime();
+  return `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
+};
