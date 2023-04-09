@@ -58,11 +58,11 @@ const getPublicIdFromUrl = (url: string) => {
 
 const publicId = getPublicIdFromUrl(cloudinaryUrl);
 
-const generateSHA1 = (data: any) => {
-  const hash = crypto.createHash('sha1');
-  hash.update(data);
-  return hash.digest('hex');
-};
+// const generateSHA1 = (data: any) => {
+//   const hash = crypto.createHash('sha1');
+//   hash.update(data);
+//   return hash.digest('hex');
+// };
 
 const generateSignature = (publicId: string, apiSecret: string) => {
   const timestamp = new Date().getTime();
