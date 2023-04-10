@@ -8,6 +8,15 @@ import prisma from '@/lib/server';
 import getCurrentUser from '@/utils/getCurrentUser';
 import postsService from 'src/services/posts.service';
 
+export function generateStaticParams() {
+  return [
+    { slug: 'aws-quickstart' },
+    { slug: 'gpt-3-generated-poetry' },
+    { slug: 'sass-starter' },
+    { slug: 'wolfhunter' },
+  ];
+}
+
 const page = async ({ params }: { params: { slug: string } }) => {
   // const blogPost: BlogPost | null = await blogPostService.getBlogPostBySlug(
   //   params.slug
@@ -52,7 +61,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
           content={content}
           data={data}
           pinnedId={pinnedId}
-          blogSlug={blogPostmdx.slug}
+          blogSlug={params.slug}
         />
 
         <div className={styles.blog_post__time}>
