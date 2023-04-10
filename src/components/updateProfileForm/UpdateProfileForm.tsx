@@ -3,7 +3,6 @@
 import { User } from '@/utils/types';
 import { FC, FormEvent, useRef, useState } from 'react';
 import styles from '@/styles/components/updateProfileForm/updateProfileForm.module.scss';
-// import axios from '@/lib/axios';
 import { useRouter } from 'next/navigation';
 import { Validate } from 'src/class/Validate';
 import { updateProfileRules } from '@/data/validationRules/validationRules';
@@ -42,36 +41,24 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
 
     const validated = new Validate(validateData, updateProfileRules);
 
-    const formData = new FormData();
+    //image upload
     if (imageInput) {
+      const formData = new FormData();
       formData.append('file', imageInput);
       formData.append('upload_preset', 'next-blog');
-    }
 
-    try {
-      const imgRes: any = await Axios.post(
-        'https://api.cloudinary.com/v1_1/doqevddgq/image/upload',
-        formData
-      );
+      try {
+        const imgRes: any = await Axios.post(
+          'https://api.cloudinary.com/v1_1/doqevddgq/image/upload',
+          formData
+        );
 
-      if (imgRes.data.url) {
-        validateData.image = imgRes.data.url;
+        if (imgRes.data.url) {
+          validateData.image = imgRes.data.url;
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-    // delete old image
-    try {
-      const imgRes: any = await Axios.post(
-        'https://api.cloudinary.com/v1_1/doqevddgq/image/delete',
-        formData
-      );
-
-      if (imgRes.data.url) {
-        validateData.image = imgRes.data.url;
-      }
-    } catch (error) {
-      console.log(error);
     }
 
     if (validated.hasError) {

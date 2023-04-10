@@ -14,6 +14,8 @@ const UserProfileData: FC<UserProfileDataProps> = ({ currentUser }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [serverResponse, setServerResponse] = useState<any>({});
 
+  
+
   return (
     <div className={styles.user_profile}>
       <div className={styles.user_profile__left}>

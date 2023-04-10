@@ -5,11 +5,13 @@ import UserProfileData from '@/components/userProfileData/UserProfileData';
 import ChangeThemeSettings from '@/components/changeThemeSettings/ChangeThemeSettings';
 import { redirect } from 'next/navigation';
 import getUserFavouritBlog from '@/utils/getUserFavouritBlog';
+import SavedBlogs from '@/components/savedBlogs/SavedBlogs';
 
 export default async function page() {
   const currentUser = await getCurrentUser();
   const favouritBlogs = await getUserFavouritBlog();
 
+  console.log(favouritBlogs);
   // console.log(favouritBlogs)
 
   if (!currentUser) redirect('/');
@@ -18,7 +20,7 @@ export default async function page() {
     <section className={styles.container}>
       <UserProfileData currentUser={currentUser} />
       <ChangeThemeSettings />
-      {/* <Saved  */}
+      {favouritBlogs && <SavedBlogs favouritBlogs={favouritBlogs} />}
     </section>
   );
 }
