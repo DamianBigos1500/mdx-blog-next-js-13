@@ -12,17 +12,15 @@ export default async function getUserFavouritBlog() {
     });
 
     const favSlugs = pinnedPosts.map((pinnedPost) => {
-      const post = postsService.getPostBySlug(pinnedPost.blogPostSlug);
-      return { ...post.data, content: post.content };
+      return pinnedPost.blogPostSlug;
     });
 
-    // const blogPosts = await prisma.blogPost.findMany({
-    //   where: { slug: { in: favSlugs } },
-    // });
+    const blogPosts = await prisma.blogPost.findMany({
+      where: { slug: { in: favSlugs } },
+      include: { data: true },
+    });
 
-    console.log(favSlugs);
-
-    return favSlugs;
+    return blogPosts;
     // console.log(blogPosts);
   } catch (error: any) {
     return null;

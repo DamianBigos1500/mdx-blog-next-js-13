@@ -13,7 +13,7 @@ const SavedBlogs: FC<SavedBlogsProps> = ({ favouritBlogs }) => {
   return (
     <div>
       {favouritBlogs.map((blog: any, index: number) => (
-        <div key={index}>{blog.title}</div>
+        <div key={index}>{blog.data.title}</div>
       ))}
     </div>
   );

@@ -1,0 +1,24 @@
+.categories_list {
+  display: flex;
+  gap: 0.4rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.category_item {
+  margin: 1rem 0;
+  & input {
+    display: none;
+
+    &:checked ~ label {
+      border-color: var(--blue-light);
+    }
+  }
+
+  & label {
+    border: 4px solid grey;
+    border-radius: 4rem;
+
+    padding: 0.5rem 1rem;
+  }
+}

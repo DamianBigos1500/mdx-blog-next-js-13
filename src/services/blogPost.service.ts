@@ -2,9 +2,42 @@ import prisma from '@/lib/server';
 import { calculateReadingTime } from '@/utils/calculateReadingTime';
 
 export const blogPostService = {
-  getBlogPosts: async () => {
+  getBlogPosts: async (queryParams: any) => {
+    const searchIngredient = new URLSearchParams(queryParams);
+
+    let searchIngredients = searchIngredient
+      .getAll('ing[]')[0]
+      ?.split(',')
+      .join(' | ');
+
     try {
       const blogPosts = await prisma.blogPost.findMany({
+        where: {
+          OR: [
+            {
+              data: {
+                title: {
+                  contains: queryParams.search,
+                },
+              },
+            },
+            {
+              content: {
+                contains: queryParams.search,
+              },
+            },
+          ],
+
+          data: {
+            ingredients: {
+              some: {
+                name: {
+                  search: searchIngredients,
+                },
+              },
+            },
+          },
+        },
         include: {
           data: {
             include: {

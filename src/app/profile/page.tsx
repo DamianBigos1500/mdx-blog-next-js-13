@@ -11,7 +11,7 @@ export default async function page() {
   const currentUser = await getCurrentUser();
   const favouritBlogs = await getUserFavouritBlog();
 
-  console.log(favouritBlogs);
+  console.log(favouritBlogs)
   // console.log(favouritBlogs)
 
   if (!currentUser) redirect('/');
