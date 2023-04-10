@@ -6,9 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider     = "sqlite"
-  url          = "file:./dev.db"
-  // url          = env("DATABASE_URL")
+  provider     = "mysql"
+  // url          = "file:./dev.db"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -43,15 +43,15 @@ model Session {
 }
 
 model User {
-  id            String        @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
   surname       String?
-  email         String?       @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
   password      String?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   accounts      Account[]
   sessions      Session[]
   likedBlogs    pinnedBlogs[]
@@ -69,19 +69,19 @@ model BlogPost {
   id      String       @id @default(cuid())
   data    BlogPostData @relation(fields: [dataId], references: [id])
   dataId  String       @unique
-  content String      
-  slug    String      
+  content String       @db.Text
+  slug    String       @db.Text
 }
 
 model BlogPostData {
   id              String       @id @default(cuid())
-  title           String      
-  imageUrl        String      
-  secondImageUrl  String      
-  blurhash        String      
-  preparationTime String      
-  description     String      
-  publishedAt     String      
+  title           String       @db.Text
+  imageUrl        String       @db.Text
+  secondImageUrl  String       @db.Text
+  blurhash        String       @db.Text
+  preparationTime String       @db.Text
+  description     String       @db.Text
+  publishedAt     String       @db.Text
   BlogPost        BlogPost[]
   ingredients     Ingredient[]
 }

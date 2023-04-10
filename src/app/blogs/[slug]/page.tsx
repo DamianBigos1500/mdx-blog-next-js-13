@@ -11,7 +11,6 @@ const page = async ({ params }: { params: { slug: string } }) => {
   const blogPost: BlogPost | null = await blogPostService.getBlogPostBySlug(
     params.slug
   );
-
   if (!blogPost) return;
   const { data, readingTime, content } = blogPost;
 
