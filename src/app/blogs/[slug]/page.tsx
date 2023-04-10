@@ -6,31 +6,14 @@ import { BlogPost } from '@/utils/types';
 import PostOptions from '@/components/postOptions/PostOptions';
 import prisma from '@/lib/server';
 import getCurrentUser from '@/utils/getCurrentUser';
-import postsService from 'src/services/posts.service';
-
-export function generateStaticParams() {
-  return [
-    { slug: 'aws-quickstart' },
-    { slug: 'gpt-3-generated-poetry' },
-    { slug: 'sass-starter' },
-    { slug: 'wolfhunter' },
-  ];
-}
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  // const blogPost: BlogPost | null = await blogPostService.getBlogPostBySlug(
-  //   params.slug
-  // );
-  // if (!blogPost) return;
-  // const { data, readingTime, content } = blogPost;
+  const blogPost: BlogPost | null = await blogPostService.getBlogPostBySlug(
+    params.slug
+  );
 
-  let blogPostmdx: any;
-  try {
-    blogPostmdx = postsService.getPostBySlug(params.slug);
-  } catch (error) {}
-
-  console.log(blogPostmdx);
-  const { data, readingTime, content } = blogPostmdx;
+  if (!blogPost) return;
+  const { data, readingTime, content } = blogPost;
 
   let pinnedId = '';
   try {
@@ -41,7 +24,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
       const likedUserBlogs = await prisma.pinnedBlogs.findUnique({
         where: {
           like_identifier: {
-            blogPostSlug: params.slug,
+            blogPostSlug: blogPost.slug,
             userId: currentUser.id,
           },
         },
@@ -61,7 +44,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
           content={content}
           data={data}
           pinnedId={pinnedId}
-          blogSlug={params.slug}
+          blogSlug={blogPost.slug}
         />
 
         <div className={styles.blog_post__time}>
