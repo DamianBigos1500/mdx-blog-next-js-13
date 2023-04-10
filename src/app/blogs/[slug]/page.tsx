@@ -6,13 +6,22 @@ import { BlogPost } from '@/utils/types';
 import PostOptions from '@/components/postOptions/PostOptions';
 import prisma from '@/lib/server';
 import getCurrentUser from '@/utils/getCurrentUser';
+import postsService from 'src/services/posts.service';
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  const blogPost: BlogPost | null = await blogPostService.getBlogPostBySlug(
-    params.slug
-  );
-  if (!blogPost) return;
-  const { data, readingTime, content } = blogPost;
+  // const blogPost: BlogPost | null = await blogPostService.getBlogPostBySlug(
+  //   params.slug
+  // );
+  // if (!blogPost) return;
+  // const { data, readingTime, content } = blogPost;
+
+  let blogPostmdx: any;
+  try {
+    blogPostmdx = postsService.getPostBySlug(params.slug);
+  } catch (error) {}
+
+  console.log(blogPostmdx);
+  const { data, readingTime, content } = blogPostmdx;
 
   let pinnedId = '';
   try {
@@ -23,7 +32,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
       const likedUserBlogs = await prisma.pinnedBlogs.findUnique({
         where: {
           like_identifier: {
-            blogPostSlug: blogPost.slug,
+            blogPostSlug: params.slug,
             userId: currentUser.id,
           },
         },
@@ -43,7 +52,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
           content={content}
           data={data}
           pinnedId={pinnedId}
-          blogSlug={blogPost.slug}
+          blogSlug={blogPostmdx.slug}
         />
 
         <div className={styles.blog_post__time}>
