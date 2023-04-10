@@ -14,6 +14,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
   if (!blogPost) return;
   const { data, readingTime, content } = blogPost;
 
+  
   let pinnedId = '';
   try {
     const currentUser = await getCurrentUser();
