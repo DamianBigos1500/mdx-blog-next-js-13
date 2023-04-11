@@ -26,7 +26,9 @@ const SavedBlogsCard: FC<SavedBlogsCardProps> = ({ blog }) => {
         </Link>
       </div>
       <div className={styles.blog_card__right}>
-        <div className={styles.blog_card__button}>Read receipe...</div>
+        <Link href={'blogs/' + blog.slug}>
+          <div className={styles.blog_card__button}>Read receipe...</div>
+        </Link>
       </div>
     </div>
   );

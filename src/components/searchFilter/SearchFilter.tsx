@@ -4,7 +4,6 @@ import { FC, FormEvent, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '@/styles/components/searchFilter/searchFilter.module.scss';
 import Icons from '../icons/Icons';
-import Link from 'next/link';
 
 interface SearchFilterProps {
   searchParams: any;

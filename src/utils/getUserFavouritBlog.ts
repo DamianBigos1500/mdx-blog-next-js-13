@@ -1,7 +1,6 @@
 import { BlogPost } from './types';
 import prisma from '@/lib/server';
 import getCurrentUser from './getCurrentUser';
-import postsService from 'src/services/posts.service';
 
 export default async function getUserFavouritBlog() {
   try {
@@ -10,9 +9,6 @@ export default async function getUserFavouritBlog() {
     const pinnedPosts = await prisma.pinnedBlogs.findMany({
       where: { userId: user?.id },
     });
-
-    console.log(pinnedPosts);
-    
 
     const favSlugs = pinnedPosts.map((pinnedPost) => {
       return pinnedPost.blogPostSlug;
