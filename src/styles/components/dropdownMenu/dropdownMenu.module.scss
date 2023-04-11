@@ -48,3 +48,12 @@
     }
   }
 }
+
+
+@media screen and (max-width: 600px) {
+  .dropdown {
+    &__content{
+      display: none;
+    }
+  }
+}

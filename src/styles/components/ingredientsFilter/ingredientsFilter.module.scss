@@ -1,3 +1,24 @@
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  .subtitle {
+    font-size: 1.4rem;
+  }
+
+  .subtitle::first-letter {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+
+  .reset_filter {
+    cursor: pointer;
+
+  }
+}
+
 .categories_list {
   display: flex;
   gap: 0.4rem;
@@ -6,7 +27,7 @@
 }
 
 .category_item {
-  margin: 1rem 0;
+  margin: 0.6rem 0;
   & input {
     display: none;
 
@@ -16,9 +37,9 @@
   }
 
   & label {
-    border: 4px solid grey;
+    border: 2px solid grey;
     border-radius: 4rem;
 
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 0.6rem;
   }
 }

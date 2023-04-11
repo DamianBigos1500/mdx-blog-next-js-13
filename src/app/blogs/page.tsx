@@ -7,14 +7,14 @@ import IngredientsFilter from '@/components/ingredientsFilter/IngredientsFilter'
 import SearchFilter from '@/components/searchFilter/SearchFilter';
 
 const page = async ({ searchParams }: any) => {
-  console.log(searchParams);
-  
-  const blogPosts: BlogPost[] = await blogPostService.getBlogPosts(searchParams);
+  const blogPosts: BlogPost[] = await blogPostService.getBlogPosts(
+    searchParams
+  );
   const ingredients = await ingredientsService.getIngredients();
 
   return (
     <section className={styles.posts}>
-      <SearchFilter />
+      <SearchFilter searchParams={searchParams} />
       <IngredientsFilter
         ingredients={ingredients}
         searchParams={searchParams}

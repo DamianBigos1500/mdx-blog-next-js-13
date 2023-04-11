@@ -10,6 +10,7 @@ import {
   Pin,
   PinOff,
   LogOut,
+  Search,
 } from 'lucide-react';
 
 export const Icons = {
@@ -24,6 +25,7 @@ export const Icons = {
   Pin,
   PinOff,
   LogOut,
+  Search,
 };
 
 export default Icons;

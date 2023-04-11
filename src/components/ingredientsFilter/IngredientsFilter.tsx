@@ -5,7 +5,8 @@ import { FC, useEffect, useState } from 'react';
 import styles from '@/styles/components/ingredientsFilter/ingredientsFilter.module.scss';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
-import { generateNewQuerryString } from '@/utils/generateNewQuerryString';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 interface IngredientsFilterProps {
   ingredients: Ingredients[];
@@ -17,15 +18,16 @@ const IngredientsFilter: FC<IngredientsFilterProps> = ({
   searchParams,
 }) => {
   const router = useRouter();
-  const searchingParams = useSearchParams();
+  const searchParamsHook = useSearchParams();
+  const pathname = usePathname();
   const [ingredientsQuerryArray, setIngredientsQuerryArray] = useState<any>(
-    searchingParams?.getAll('ing[]') ?? []
+    searchParamsHook?.getAll('ing[]') ?? []
   );
 
   const handleInput = (e: any) => {
     const newQuery = new URLSearchParams(searchParams);
 
-    let newIngredientsParams = searchingParams
+    let newIngredientsParams = searchParamsHook
       ?.getAll('ing[]')
       .filter((prev: string) => prev !== e.target.value);
 
@@ -49,9 +51,19 @@ const IngredientsFilter: FC<IngredientsFilterProps> = ({
     router.push('/blogs?' + newQuery.toString());
   };
 
+  const resetFilter = () => {
+    router.push('/blogs');
+    setIngredientsQuerryArray([]);
+  };
+
   return (
     <div>
-      <div className={styles.subtitle}>choose your ingredients</div>
+      <div className={styles.heading}>
+        <div className={styles.subtitle}>choose your ingredients</div>
+        <div className={styles.reset_filter} onClick={resetFilter}>
+          Reset filters
+        </div>
+      </div>
       <ul className={styles.categories_list}>
         {ingredients.map((ingredient: Ingredients) => {
           return (
