@@ -11,19 +11,18 @@ import {
 import PDFFile from '../PDF/PDFFile';
 import Icons from '../icons/Icons';
 import axios from '@/lib/axios';
+import { User } from '@/utils/types';
 
 interface PostOptionsProps {
-  content: string;
-  data: any;
   pinnedId?: string;
   blogSlug: string;
+  currentUser?: User | null;
 }
 
 const PostOptions: FC<PostOptionsProps> = ({
   pinnedId,
   blogSlug,
-  content,
-  data,
+  currentUser,
 }) => {
   const [isLiked, setIsLiked] = useState(pinnedId ? true : false);
 
@@ -53,10 +52,12 @@ const PostOptions: FC<PostOptionsProps> = ({
 
   return (
     <div className={styles.post_options}>
-      <span className={styles.post_options__pin} onClick={clickPin}>
-        {!isLiked ? <span>Save</span> : <span>Unsave</span>}
-        {!isLiked ? <Icons.Pin /> : <Icons.PinOff />}
-      </span>
+      {currentUser && (
+        <span className={styles.post_options__pin} onClick={clickPin}>
+          {!isLiked ? <span>Save</span> : <span>Unsave</span>}
+          {!isLiked ? <Icons.Pin /> : <Icons.PinOff />}
+        </span>
+      )}
 
       {/* <DropdownMenu>
         <DropdownMenuTrigger>Open download</DropdownMenuTrigger>

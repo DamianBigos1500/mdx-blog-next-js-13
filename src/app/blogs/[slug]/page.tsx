@@ -14,13 +14,13 @@ const page = async ({ params }: { params: { slug: string } }) => {
   if (!blogPost) return;
   const { data, readingTime, content } = blogPost;
 
-  
   let pinnedId = '';
+  let currentUser;
+
   try {
-    const currentUser = await getCurrentUser();
+    currentUser = await getCurrentUser();
 
     if (currentUser) {
-      // get id of pinnedBlog
       const likedUserBlogs = await prisma.pinnedBlogs.findUnique({
         where: {
           like_identifier: {
@@ -33,18 +33,15 @@ const page = async ({ params }: { params: { slug: string } }) => {
     }
   } catch (error) {}
 
-  // const downloadPdf
-
   return (
     <section className={styles.blog_post__container}>
       <BlogPostHeader src={data.imageUrl} title={data.title} />
 
       <div className={styles.blog_post__content}>
         <PostOptions
-          content={content}
-          data={data}
           pinnedId={pinnedId}
           blogSlug={blogPost.slug}
+          currentUser={currentUser}
         />
 
         <div className={styles.blog_post__time}>

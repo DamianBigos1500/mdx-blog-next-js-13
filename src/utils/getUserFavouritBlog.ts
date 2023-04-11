@@ -11,6 +11,9 @@ export default async function getUserFavouritBlog() {
       where: { userId: user?.id },
     });
 
+    console.log(pinnedPosts);
+    
+
     const favSlugs = pinnedPosts.map((pinnedPost) => {
       return pinnedPost.blogPostSlug;
     });

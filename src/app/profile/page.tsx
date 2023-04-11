@@ -20,7 +20,7 @@ export default async function page() {
     <section className={styles.container}>
       <UserProfileData currentUser={currentUser} />
       <ChangeThemeSettings />
-      {favouritBlogs && <SavedBlogs favouritBlogs={favouritBlogs} />}
+      <SavedBlogs favouritBlogs={favouritBlogs} />
     </section>
   );
 }
