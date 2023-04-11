@@ -56,9 +56,7 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
         if (imgRes.data.url) {
           validateData.image = imgRes.data.url;
         }
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
 
     if (validated.hasError) {

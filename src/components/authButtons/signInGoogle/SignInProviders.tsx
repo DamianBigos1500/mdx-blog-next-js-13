@@ -12,7 +12,6 @@ const SignInProviders: FC = () => {
     try {
       await signIn(providerName);
     } catch (error) {
-      console.log(error);
     }
   };
 

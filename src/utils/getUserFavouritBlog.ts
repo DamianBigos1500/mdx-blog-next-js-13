@@ -20,7 +20,6 @@ export default async function getUserFavouritBlog() {
     });
 
     return blogPosts;
-    // console.log(blogPosts);
   } catch (error: any) {
     return null;
   }

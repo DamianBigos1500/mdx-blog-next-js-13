@@ -41,7 +41,6 @@ export async function POST(request: Request) {
       ...newImg,
     },
   });
-  console.log(updatedUser);
 
   return NextResponse.json({ message: 'success', user: updatedUser });
 }

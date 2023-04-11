@@ -27,7 +27,6 @@ const PostOptions: FC<PostOptionsProps> = ({
   const [isLiked, setIsLiked] = useState(pinnedId ? true : false);
 
   const clickPin = async () => {
-    console.log('here');
 
     if (isLiked) {
       setIsLiked(false);
@@ -36,7 +35,6 @@ const PostOptions: FC<PostOptionsProps> = ({
           pinnedId: pinnedId,
         });
       } catch (error) {
-        console.log(error);
       }
     } else {
       setIsLiked(true);
@@ -45,7 +43,6 @@ const PostOptions: FC<PostOptionsProps> = ({
           blogSlug: blogSlug,
         });
       } catch (error) {
-        console.log(error);
       }
     }
   };

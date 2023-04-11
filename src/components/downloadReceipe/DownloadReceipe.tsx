@@ -13,7 +13,6 @@ interface DownloadReceipeProps {}
 
 const DownloadReceipe: FC<DownloadReceipeProps> = ({}) => {
   const handleDownload = (downloadMethod: string) => {
-    console.log(downloadMethod);
   };
 
   return (

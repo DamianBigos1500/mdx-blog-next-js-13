@@ -67,9 +67,9 @@ const SignInForm: FC<SignInFormProps> = ({}) => {
         password: enteredPassword,
       });
 
-      console.log(result);
       if (result?.error) {
         setServerResponse({ message: 'Invalid credentials ', code: 401 });
+        setLoading(false);
         return;
       }
       setServerResponse({ message: 'Logged in succesfully', code: 200 });
@@ -83,6 +83,7 @@ const SignInForm: FC<SignInFormProps> = ({}) => {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
+      <span className="text-sm">Demo email:w@w.com password: 12345678</span>
       <h2 className="title">{isLogin ? 'Login' : 'Register'}</h2>
       <div className="form_groups">
         {serverResponse && (
@@ -104,13 +105,18 @@ const SignInForm: FC<SignInFormProps> = ({}) => {
         )}
 
         <div className="group">
-          <input placeholder="" id="email" ref={emailInputRef} />
+          <input placeholder="" id="email" type="email" ref={emailInputRef} />
           <label htmlFor="email">email</label>
           <div className="text-error text-sm">{errors?.email}</div>
         </div>
 
         <div className="group">
-          <input placeholder="" id="password" ref={passwordInputRef} />
+          <input
+            placeholder=""
+            id="password"
+            ref={passwordInputRef}
+            type="password"
+          />
           <label htmlFor="password">password</label>
           <div className="text-error text-sm">{errors?.password}</div>
         </div>
@@ -121,6 +127,7 @@ const SignInForm: FC<SignInFormProps> = ({}) => {
               placeholder=""
               id="password_confirmation"
               ref={passwordCfInputRef}
+              type="password"
             />
             <label htmlFor="password_confirmation">password confirmation</label>
             <div className="text-error text-sm">
