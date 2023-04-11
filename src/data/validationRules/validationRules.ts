@@ -10,7 +10,6 @@ export const signUpRules = {
 };
 
 export const signInRules = {
-  name: ['required', 'min:3', 'max:255'],
   email: ['required', 'email', 'max:255'],
-  password: ['required', 'confirmed', 'min:8', 'max:255'],
+  password: ['required', 'min:8', 'max:255'],
 };

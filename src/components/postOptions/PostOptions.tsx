@@ -2,16 +2,10 @@
 
 import { FC, useState } from 'react';
 import styles from '@/styles/components/postOptions/postOptions.module.scss';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/DropdownMenu';
-import PDFFile from '../PDF/PDFFile';
 import Icons from '../icons/Icons';
 import axios from '@/lib/axios';
 import { User } from '@/utils/types';
+import { useRouter } from 'next/navigation';
 
 interface PostOptionsProps {
   pinnedId?: string;
@@ -24,27 +18,27 @@ const PostOptions: FC<PostOptionsProps> = ({
   blogSlug,
   currentUser,
 }) => {
+  const router = useRouter();
   const [isLiked, setIsLiked] = useState(pinnedId ? true : false);
 
   const clickPin = async () => {
-
     if (isLiked) {
       setIsLiked(false);
       try {
         await axios.post('/api/unlike-blog', {
           pinnedId: pinnedId,
         });
-      } catch (error) {
-      }
+      } catch (error) {}
     } else {
       setIsLiked(true);
       try {
         await axios.post('/api/like-blog', {
           blogSlug: blogSlug,
         });
-      } catch (error) {
-      }
+      } catch (error) {}
     }
+    
+    router.refresh();
   };
 
   return (
@@ -55,18 +49,6 @@ const PostOptions: FC<PostOptionsProps> = ({
           {!isLiked ? <Icons.Pin /> : <Icons.PinOff />}
         </span>
       )}
-
-      {/* <DropdownMenu>
-        <DropdownMenuTrigger>Open download</DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem className={styles.dropdown__item}>
-            <span onClick={downloadHandle}>Download PDF</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem className={styles.dropdown__item}>
-            <span>Download PDF No images</span>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu> */}
     </div>
   );
 };

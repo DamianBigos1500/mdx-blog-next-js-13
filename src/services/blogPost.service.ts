@@ -97,5 +97,6 @@ export const blogPostService = {
     } catch (error: any) {
       // throw new Error(error);
     }
+    return null;
   },
 };

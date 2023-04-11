@@ -6,6 +6,11 @@ import GithubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import prisma from '@/lib/server';
 import bcrypt from 'bcrypt';
+import {
+  signInRules,
+  signUpRules,
+} from '@/data/validationRules/validationRules';
+import { Validate } from 'src/class/Validate';
 
 function checkCredentialsExistance(id?: string, secret?: string) {
   if (!id || id.length == 0) {
@@ -76,8 +81,16 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
-        if (!credentials?.password || !credentials.email) {
-          return null;
+        const formData = {
+          email: credentials?.email,
+          password: credentials?.password,
+        };
+
+        const validated = new Validate(formData, signInRules);
+
+        if (validated.hasError) {
+          console.log(validated.errors);
+          throw Error('Invalid credentials');
         }
 
         const user = await prisma.user.findFirst({
@@ -87,15 +100,10 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (user && user.password) {
-          bcrypt.compare(credentials.password, user.password);
-
-          // Any object returned will be saved in `user` property of the JWT
+          bcrypt.compare(credentials?.password!, user.password);
           return user;
         } else {
-          // If you return null then an error will be displayed advising the user to check their details.
           return null;
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
       },
     }),
@@ -142,11 +150,5 @@ export const authOptions: NextAuthOptions = {
         picture: dbUser.image,
       };
     },
-    redirect() {
-      return '/blogs';
-    },
-  },
-  pages: {
-    signIn: '/',
   },
 };

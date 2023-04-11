@@ -6,9 +6,12 @@ import { signIn } from 'next-auth/react';
 import { Validate } from 'src/class/Validate';
 import { signUpRules } from '@/data/validationRules/validationRules';
 import axios from '@/lib/axios';
+import { useRouter } from 'next/navigation';
 interface SignInFormProps {}
 
 const SignInForm: FC<SignInFormProps> = ({}) => {
+  const router = useRouter();
+
   const nameInputRef = useRef<any>();
   const emailInputRef = useRef<any>();
   const passwordInputRef = useRef<any>();
@@ -72,10 +75,11 @@ const SignInForm: FC<SignInFormProps> = ({}) => {
         setLoading(false);
         return;
       }
+
       setServerResponse({ message: 'Logged in succesfully', code: 200 });
+      router.refresh();
     } catch (error) {
-      console.log(error);
-      setServerResponse({ message: 'Could not log you in', code: 200 });
+      setServerResponse({ message: 'Could not log you in', code: 500 });
     }
 
     setLoading(false);
