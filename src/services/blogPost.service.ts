@@ -5,10 +5,23 @@ export const blogPostService = {
   getBlogPosts: async (queryParams: any) => {
     const searchIngredient = new URLSearchParams(queryParams);
 
-    let searchIngredients = searchIngredient
-      .getAll('ing[]')[0]
-      ?.split(',')
-      .join(' | ');
+    let searchIngredients = searchIngredient.getAll('ing[]')[0]?.split(',');
+
+    let ingredientsArray: any = [];
+
+    searchIngredients?.map((ingredient, index) => {
+      ingredientsArray.push({
+        data: {
+          ingredients: {
+            some: {
+              name: {
+                search: ingredient,
+              },
+            },
+          },
+        },
+      });
+    });
 
     try {
       const blogPosts = await prisma.blogPost.findMany({
@@ -28,15 +41,7 @@ export const blogPostService = {
             },
           ],
 
-          data: {
-            ingredients: {
-              some: {
-                name: {
-                  search: searchIngredients,
-                },
-              },
-            },
-          },
+          AND: ingredientsArray,
         },
         include: {
           data: {
