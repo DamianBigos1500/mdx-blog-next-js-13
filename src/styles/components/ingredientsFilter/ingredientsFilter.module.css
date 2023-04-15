@@ -1,0 +1,38 @@
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.heading .subtitle {
+  font-size: 1.4rem;
+}
+.heading .subtitle::first-letter {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+.heading .reset_filter {
+  cursor: pointer;
+}
+
+.categories_list {
+  display: flex;
+  gap: 0.4rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.category_item {
+  margin: 0.6rem 0;
+}
+.category_item input {
+  display: none;
+}
+.category_item input:checked ~ label {
+  border-color: var(--blue-light);
+}
+.category_item label {
+  border: 2px solid grey;
+  border-radius: 4rem;
+  padding: 0.4rem 0.6rem;
+}/*# sourceMappingURL=ingredientsFilter.module.css.map */

@@ -23,15 +23,13 @@
   left: 10vw;
   padding: 0.4rem 1.6rem;
   font-size: 1.8em;
+  color: var(--white);
   background-image: var(--gradient-primary);
   transition: transform 0.4s ease-out;
   -webkit-clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
           clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
   z-index: 100;
-  overflow: hidden;
-  white-space: nowrap;
   max-width: 100%;
-  text-overflow: ellipsis;
 }
 .post_card__product_info {
   display: flex;
@@ -135,7 +133,7 @@
   --t: 0.2s 0.1s;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
   .post_card {
     display: flex;
     flex-direction: column;
@@ -161,7 +159,7 @@
     display: none;
   }
   .post_card__title {
-    top: 14rem;
+    top: 12rem;
     left: 0;
   }
   .post_card__product_info {

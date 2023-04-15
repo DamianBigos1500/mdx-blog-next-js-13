@@ -15,7 +15,7 @@ export const blogPostService = {
           ingredients: {
             some: {
               name: {
-                search: ingredient,
+                contains: ingredient,
               },
             },
           },
@@ -52,6 +52,8 @@ export const blogPostService = {
         },
       });
 
+      console.log(blogPosts);
+
       return blogPosts.map((blogPost) => {
         const ingredients = blogPost.data.ingredients.map((ingredient: any) => {
           return ingredient.name;
@@ -64,7 +66,8 @@ export const blogPostService = {
         };
       });
     } catch (error: any) {
-      throw new Error(error);
+      console.log(error);
+      
     }
   },
 

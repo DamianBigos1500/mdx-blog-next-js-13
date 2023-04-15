@@ -13,24 +13,21 @@ export async function GET() {
     for (ingredient of post.data.ingredients) {
       let prom;
 
-      prom = await prisma.ingredient.findUnique({
-        where: {
-          name: ingredient,
-        },
-      });
-
-      if (!prom) {
-        prom = await prisma.ingredient.upsert({
+      try {
+        prom = await prisma.ingredient.findFirst({
           where: {
             name: ingredient,
           },
-          update: {},
-          create: {
-            name: ingredient,
-          },
         });
-      }
 
+        if (!prom) {
+          prom = await prisma.ingredient.create({
+            data: { name: ingredient },
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
       ids.push(prom);
     }
 
@@ -68,6 +65,7 @@ export async function GET() {
         },
       });
     } catch (error) {
+      console.log(error);
     }
   }
 

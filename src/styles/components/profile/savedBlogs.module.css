@@ -1,0 +1,6 @@
+.saved_blogs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}/*# sourceMappingURL=savedBlogs.module.css.map */

@@ -65,6 +65,7 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   session: {
     strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60,
   },
 
   providers: [
@@ -100,7 +101,8 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (user && user.password) {
-          bcrypt.compare(credentials?.password!, user.password);
+          const isValid = bcrypt.compare(credentials?.password!, user.password);
+          console.log(user);
           return user;
         } else {
           return null;

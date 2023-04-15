@@ -1,0 +1,21 @@
+.update_profile_form__group {
+  display: flex;
+  flex-direction: column;
+}
+.update_profile_form__input {
+  width: 100%;
+  background: transparent;
+  border: 2px solid gray;
+  font-size: 1rem;
+  border-radius: 6px;
+  outline: none;
+  padding: 0.2rem 0.4rem;
+}
+.update_profile_form__buttons {
+  display: flex;
+  gap: 1rem;
+}
+.update_profile_form__button {
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+}/*# sourceMappingURL=updateProfileForm.module.css.map */

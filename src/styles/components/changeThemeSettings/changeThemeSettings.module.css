@@ -1,0 +1,52 @@
+.theme_settings {
+  padding: 1rem;
+  margin: 2rem 0;
+  border-radius: 1rem;
+  background: var(--bg-color-secondary);
+}
+
+.themes_list {
+  display: flex;
+  gap: min(3vw, 1rem);
+  margin: 1rem 0;
+}
+
+.theme_item {
+  cursor: pointer;
+}
+
+.radio {
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.radio input[type=radio] {
+  display: none;
+}
+.radio span {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  border: 3px solid var(--blue-light);
+  margin-right: 0.4rem;
+  position: relative;
+}
+.radio span:after {
+  content: "";
+  background: var(--blue-light);
+  width: 0.4rem;
+  height: 0.4rem;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  transition: 200ms ease-in-out 0s;
+}
+.radio input[type=radio]:checked ~ span:after {
+  transform: translate(-50%, -50%) scale(1);
+}/*# sourceMappingURL=changeThemeSettings.module.css.map */

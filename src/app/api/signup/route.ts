@@ -13,22 +13,23 @@ export async function POST(request: Request) {
       JSON.stringify({
         errors: validated.errors,
       }),
-      {
-        status: 422,
-      }
+      { status: 422 }
     );
   }
 
-  const newUser = await prisma.user.create({
-    data: {
-      name: body.name,
-      image:
-        body.image ??
-        'https://images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      email: body.email,
-      password: bcrypt.hashSync(body.password, 12),
-    },
-  });
-
-  return NextResponse.json({ message: 'success', user: newUser });
+  try {
+    const newUser = await prisma.user.create({
+      data: {
+        name: body.name,
+        image:
+          body.image ??
+          'https://images.pexels.com/photos/247676/pexels-photo-247676.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        email: body.email,
+        password: bcrypt.hashSync(body.password, 12),
+      },
+    });
+    return NextResponse.json({ message: 'success', user: newUser });
+  } catch (error) {
+    console.log(error);
+  }
 }

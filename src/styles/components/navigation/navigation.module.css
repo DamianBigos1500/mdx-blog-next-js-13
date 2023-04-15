@@ -1,3 +1,52 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes moveUp {
+  from {
+    transform: translateY(1rem);
+  }
+  to {
+    transform: translateY(0rem);
+  }
+}
+@keyframes moveDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(1rem);
+  }
+}
+@keyframes moveRight {
+  from {
+    transform: translateX(6rem);
+  }
+  to {
+    transform: translateX(0rem);
+  }
+}
+@keyframes moveLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    display: none;
+    transform: translateX(6rem);
+  }
+}
 .nav {
   background-color: var(--bg-color-secondary);
   height: var(--nav-height);
@@ -6,6 +55,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+}
+.nav__right {
+  display: flex;
+  height: 100%;
 }
 .nav__logo {
   display: flex;
@@ -24,10 +78,24 @@
   gap: 1rem;
   list-style: none;
 }
+.nav__toggle_theme {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
 .nav__item {
   display: block;
   position: relative;
   transition: 0.1s ease-out color;
+}
+.nav__menu_toggle {
+  position: absolute;
+  z-index: 1001;
+  display: none;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
 }
 .nav__item::before {
   content: "";
@@ -44,4 +112,19 @@
 .nav__item:hover:before {
   transition: transform 0.5s;
   transform-origin: left;
+}
+.nav__mobile {
+  display: none;
+}
+.nav__mobile_nav {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .nav__links {
+    display: none;
+  }
+  .nav__mobile_nav {
+    display: flex;
+  }
 }/*# sourceMappingURL=navigation.module.css.map */
