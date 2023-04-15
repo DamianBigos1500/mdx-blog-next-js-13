@@ -83,7 +83,7 @@ export async function GET() {
 
   // const ingredients = await prisma.ingredient.findMany({});
 
-  return NextResponse.json({ blogs: blogs, ingredients: ingredients });
+  // return NextResponse.json({ blogs: blogs, ingredients: ingredients });
 }
 
 // export async function POST() {
