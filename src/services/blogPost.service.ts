@@ -52,8 +52,6 @@ export const blogPostService = {
         },
       });
 
-      console.log(blogPosts);
-
       return blogPosts.map((blogPost) => {
         const ingredients = blogPost.data.ingredients.map((ingredient: any) => {
           return ingredient.name;
