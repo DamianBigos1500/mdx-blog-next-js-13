@@ -3,7 +3,7 @@ import { calculateReadingTime } from '@/utils/calculateReadingTime';
 
 export const blogPostService = {
   getBlogPosts: async (queryParams: any) => {
-    const searchIngredient = new URLSearchParams(queryParams);
+    const searchIngredient = new URLSearchParams(queryParams ?? {});
 
     let searchIngredients = searchIngredient.getAll('ing[]')[0]?.split(',');
 
