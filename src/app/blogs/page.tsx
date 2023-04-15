@@ -10,7 +10,10 @@ const page = async ({ searchParams }: any) => {
   const blogPosts: BlogPost[] = await blogPostService.getBlogPosts(
     searchParams
   );
-  const ingredients = await ingredientsService.getIngredients();
+  let ingredients;
+  try {
+    ingredients = await ingredientsService.getIngredients();
+  } catch (error) {}
 
   return (
     <section className={styles.posts}>

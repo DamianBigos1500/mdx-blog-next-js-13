@@ -9,7 +9,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 interface IngredientsFilterProps {
-  ingredients: Ingredients[];
+  ingredients?: Ingredients[] | null;
   searchParams: any;
 }
 
@@ -65,7 +65,7 @@ const IngredientsFilter: FC<IngredientsFilterProps> = ({
         </div>
       </div>
       <ul className={styles.categories_list}>
-        {ingredients.map((ingredient: Ingredients) => {
+        {ingredients?.map((ingredient: Ingredients) => {
           return (
             <li key={ingredient.id} className={styles.category_item}>
               <input
