@@ -11,17 +11,17 @@ const page = async ({ searchParams }: any) => {
     searchParams
   );
   let ingredients;
-  try {
-    ingredients = await ingredientsService.getIngredients();
-  } catch (error) {}
+  // try {
+  //   ingredients = await ingredientsService.getIngredients();
+  // } catch (error) {}
 
   return (
     <section className={styles.posts}>
       <SearchFilter searchParams={searchParams} />
-      <IngredientsFilter
+      {/* <IngredientsFilter
         ingredients={ingredients}
         searchParams={searchParams}
-      />
+      /> */}
       {blogPosts.map((post: any) => (
         <BlogPostCard key={post.slug} post={post} />
       ))}
