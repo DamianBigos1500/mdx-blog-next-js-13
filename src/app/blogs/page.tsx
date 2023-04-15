@@ -10,18 +10,18 @@ const page = async ({ searchParams }: any) => {
   // const blogPosts: BlogPost[] = await blogPostService.getBlogPosts(
   //   searchParams
   // );
-  let ingredients;
-  try {
-    ingredients = await ingredientsService.getIngredients();
-  } catch (error) {}
+  // let ingredients;
+  // try {
+  //   ingredients = await ingredientsService.getIngredients();
+  // } catch (error) {}
 
   return (
     <section className={styles.posts}>
-      <SearchFilter searchParams={searchParams} />
+      {/* <SearchFilter searchParams={searchParams} />
       <IngredientsFilter
         ingredients={ingredients}
         searchParams={searchParams}
-      />
+      /> */}
       {/* {blogPosts.map((post: any) => (
         <BlogPostCard key={post.slug} post={post} />
       ))} */}
