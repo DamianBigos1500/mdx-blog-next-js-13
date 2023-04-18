@@ -1,0 +1,11 @@
+.about {
+  padding: 6rem calc(100vw - 90%);
+
+  & > h2 {
+    margin-top: 2rem;
+  }
+}
+
+.list {
+  padding-left: 1rem;
+}

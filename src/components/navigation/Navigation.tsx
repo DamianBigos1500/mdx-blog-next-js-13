@@ -9,6 +9,7 @@ import { FC, useState } from 'react';
 import MobileNavbar from '../mobileNavbar/MobileNavbar';
 import { navItems } from '@/data/navItems';
 import { User } from '@/utils/types';
+import Logo from '../logo/Logo';
 
 interface MobileNavbarProps {
   currentUser: User | null;
@@ -18,7 +19,7 @@ const Navigation: FC<MobileNavbarProps> = ({ currentUser }) => {
   return (
     <nav className={`${styles.nav} shadow`}>
       <Link href="/">
-        <span className={styles.nav__logo}>D</span>
+        <Logo />
       </Link>
 
       <div className={styles.nav__right}>

@@ -30,7 +30,6 @@ a {
   box-shadow: 4px 8px 8px hsla(0, 0%, 0%, 0.185);
 }
 
-
 .form {
   margin: 0 0 1rem 0;
 
@@ -87,7 +86,14 @@ a {
   }
 }
 
-
-.text-center{
+.text-center {
   text-align: center;
+}
+
+.logo {
+  color: rgb(36, 101, 241);
+  padding: 0.4rem 1rem;
+  background: rgb(234, 191, 80);
+  font-weight: bold;
+  border-radius: 10px;
 }
