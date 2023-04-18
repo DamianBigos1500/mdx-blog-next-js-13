@@ -20,7 +20,7 @@ const page: FC<pageProps> = ({}) => {
 
       <h2>Future of this website</h2>
       <p>
-        I plan to fill this website with real cake's recipies, change home page
+        I plan to fill this website with real cake&apos;s recipies, change home page
         and use it for my purposes
       </p>
     </div>
