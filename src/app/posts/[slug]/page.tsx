@@ -11,7 +11,7 @@ import axios from '@/lib/axios';
 const postFilesDir = rootDirectory + '/public/mdx';
 
 async function getData(slug: string) {
-  const res = await axios.post('http://localhost:3000/api/getPostBySlug', {
+  const res = await axios.post('api/getPostBySlug', {
     slug,
   });
 
