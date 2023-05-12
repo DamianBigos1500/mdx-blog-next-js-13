@@ -2,14 +2,24 @@ import MdxContent from '@/components/Mdx/MdxContent/MdxContent';
 import PostHeader from '@/features/post/components/PostHeader/PostHeader';
 import postsService from '@/services/posts.service';
 import styles from '@/styles/pages/posts/post.module.scss';
+import rootDirectory from '@/utils/rootDirectory';
+import matter from 'gray-matter';
+import fs from 'fs';
 // import PostOptions from '@/components/postOptions/PostOptions';
 // import prisma from '@/lib/server';
 // import getCurrentUser from '@/utils/getCurrentUser';
 
+const postFilesDir = rootDirectory + '/public/mdx';
+
 const page = async ({ params }: { params: { slug: string } }) => {
-  const post: any | null =  postsService.getPosts();
+  // const post: any | null = postsService.getPosts();
   // if (!post) return <div>no post found</div>;
-  console.log(post);
+  try {
+    const filePath = postFilesDir + '/' + params.slug + '.mdx';
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const { data, content } = matter(fileContent);
+    console.log(content);
+  } catch (error) {}
 
   // const { data, readingTime, content } = post;
 

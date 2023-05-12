@@ -41,6 +41,7 @@ const postsService = {
 
   getPostBySlug: (slug: string): any => {
     const filePath = postFilesDir + '/' + slug + '.mdx';
+    
     const fileContent = fs.readFileSync(filePath, 'utf8');
 
     const { data, content } = matter(fileContent);
