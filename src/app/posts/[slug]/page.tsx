@@ -14,10 +14,12 @@ const postFilesDir = rootDirectory + '/public/mdx';
 const page = async ({ params }: { params: { slug: string } }) => {
   // const post: any | null = postsService.getPosts();
   // if (!post) return <div>no post found</div>;
-    const filePath = postFilesDir + '/' + params.slug + '.mdx';
+  const filePath = postFilesDir + '/' + params.slug + '.mdx';
+  try {
     const fileContent = fs.readFileSync(filePath, 'utf8');
-    const { data, content } = matter(fileContent);
-    console.log(content);
+  } catch (error) {}
+  // const { data, content } = matter(fileContent);
+  console.log('content');
 
   // const { data, readingTime, content } = post;
 
