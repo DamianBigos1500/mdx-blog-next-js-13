@@ -4,7 +4,6 @@ import { FC, FormEvent, useRef, useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { Validate } from '@/class/Validate';
 import { signUpRules } from '@/utils/validationRules';
-import axios from '@/lib/axios';
 import { useRouter } from 'next/navigation';
 import styles from './signInForm.module.scss';
 import authService from '../../services/auth.service';

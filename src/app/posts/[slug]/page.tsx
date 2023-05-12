@@ -7,12 +7,14 @@ import styles from '@/styles/pages/posts/post.module.scss';
 // import getCurrentUser from '@/utils/getCurrentUser';
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  const post: any | null = await postsService.getPostBySlug(params.slug);
-  if (!post) return;
-  const { data, readingTime, content } = post;
+  // const post: any | null = await postsService.getPostBySlug(params.slug);
+  // if (!post) return <div>no post found</div>;
+  console.log(params.slug);
 
-  let pinnedId = '';
-  let currentUser;
+  // const { data, readingTime, content } = post;
+
+  // let pinnedId = '';
+  // let currentUser;
 
   try {
     // currentUser = await getCurrentUser();
@@ -31,7 +33,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <section className={styles.post__container}>
-      <PostHeader src={data.imageUrl} title={data.title} />
+      {/* <PostHeader src={data.imageUrl} title={data.title} /> */}
 
       <div className={styles.post__content}>
         {/* <PostOptions
@@ -41,12 +43,12 @@ const page = async ({ params }: { params: { slug: string } }) => {
         /> */}
 
         <div className={styles.post__time}>
-          <span>Preparation time: {data.preparationTime} min</span>
-          <span>Read time: {readingTime} min</span>
+          {/* <span>Preparation time: {data.preparationTime} min</span> */}
+          {/* <span>Read time: {readingTime} min</span> */}
         </div>
 
         <div className={styles.post__mdx}>
-          <MdxContent source={content} data={data} />
+          {/* <MdxContent source={content} data={data} /> */}
         </div>
       </div>
     </section>
