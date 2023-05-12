@@ -1,0 +1,29 @@
+:root {
+  --bg-color-primary: #fff;
+  --bg-color-secondary: #ebebeb;
+  --bg-color-tertiary: #dedede;
+  --color-main: #9be15d;
+  --color-primary: #000;
+  --color-secondary: #23cd4b;
+  --color-tertiary: #39b385;
+  --black: black;
+  --white: white;
+  --blue-light: #00aeef;
+  --nav-height: 4rem;
+  --gradient-primary: linear-gradient(
+    to top left,
+    var(--color-tertiary),
+    var(--color-main)
+  );
+  --silver-grey: #c0c0c0;
+
+  //navbar
+  --hover-navbar: #222;
+}
+
+[class='dark'] {
+  --bg-color-primary: #555;
+  --bg-color-secondary: #222;
+  --bg-color-tertiary: #282828;
+  --color-primary: #fff;
+}
