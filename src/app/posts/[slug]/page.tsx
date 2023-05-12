@@ -16,7 +16,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
   // if (!post) return <div>no post found</div>;
   const filePath = postFilesDir + '/' + params.slug + '.mdx';
   try {
-    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const fileContent = fs.readFileSync(filePath);
   } catch (error) {}
   // const { data, content } = matter(fileContent);
   console.log('content');
