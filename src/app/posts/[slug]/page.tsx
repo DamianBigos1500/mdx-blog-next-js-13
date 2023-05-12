@@ -3,25 +3,24 @@ import PostHeader from '@/features/post/components/PostHeader/PostHeader';
 import postsService from '@/services/posts.service';
 import styles from '@/styles/pages/posts/post.module.scss';
 import rootDirectory from '@/utils/rootDirectory';
-import matter from 'gray-matter';
-import fs from 'fs';
+import axios from '@/lib/axios';
 // import PostOptions from '@/components/postOptions/PostOptions';
 // import prisma from '@/lib/server';
 // import getCurrentUser from '@/utils/getCurrentUser';
 
 const postFilesDir = rootDirectory + '/public/mdx';
 
-const page = async ({ params }: { params: { slug: string } }) => {
-  // const post: any | null = postsService.getPosts();
-  // if (!post) return <div>no post found</div>;
-  const filePath = postFilesDir + '/' + params.slug + '.mdx';
-  // try {
-    const fileContent = fs.readFileSync(filePath);
-  // } catch (error) {}
-  // const { data, content } = matter(fileContent);
-  console.log('content');
+async function getData(slug: string) {
+  const res = await axios.post('http://localhost:3000/api/getPostBySlug', {
+    slug,
+  });
 
-  // const { data, readingTime, content } = post;
+  return res;
+}
+
+const page = async ({ params }: { params: { slug: string } }) => {
+  const res: any = await getData(params.slug);
+  const { data, readingTime, content } = res.data.post;
 
   // let pinnedId = '';
   // let currentUser;
@@ -43,7 +42,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <section className={styles.post__container}>
-      {/* <PostHeader src={data.imageUrl} title={data.title} /> */}
+      <PostHeader src={data.imageUrl} title={data.title} />
 
       <div className={styles.post__content}>
         {/* <PostOptions
@@ -53,12 +52,12 @@ const page = async ({ params }: { params: { slug: string } }) => {
         /> */}
 
         <div className={styles.post__time}>
-          {/* <span>Preparation time: {data.preparationTime} min</span> */}
-          {/* <span>Read time: {readingTime} min</span> */}
+          <span>Preparation time: {data.preparationTime} min</span>
+          <span>Read time: {readingTime} min</span>
         </div>
 
         <div className={styles.post__mdx}>
-          {/* <MdxContent source={content} data={data} /> */}
+          <MdxContent source={content} data={data} />
         </div>
       </div>
     </section>

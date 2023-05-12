@@ -41,20 +41,23 @@ const postsService = {
 
   getPostBySlug: (slug: string): any => {
     const filePath = postFilesDir + '/' + slug + '.mdx';
-    
-    const fileContent = fs.readFileSync(filePath, 'utf8');
 
-    const { data, content } = matter(fileContent);
-    return {
-      data: {
-        ...data,
-        publishedAt: dayjs(data.publishedAt).format('DD MMMM YYYY'),
-      } as IBlogPost['data'],
-      content,
-      slug,
-      readingTime: calculateReadingTime(content),
-    };
-    return fileContent;
+    try {
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+
+      const { data, content } = matter(fileContent);
+      return {
+        data: {
+          ...data,
+          publishedAt: dayjs(data.publishedAt).format('DD MMMM YYYY'),
+        } as IBlogPost['data'],
+        content,
+        slug,
+        readingTime: calculateReadingTime(content),
+      };
+    } catch (error) {
+      return null;
+    }
   },
 };
 
