@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { FC } from 'react';
-import styles from './postCard.module.scss';
+import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import styles from './postCard.module.scss';
 
 interface BlogPostCardProps {
   post: any;
@@ -14,7 +14,7 @@ const BlogPostCard: FC<BlogPostCardProps> = ({ post }) => {
   const router = useRouter();
 
   const ingredientsString = post.data.ingredients.join(', ');
-  let blogLink = `/blogs/${post.slug}`;
+  let blogLink = `/posts/${post.slug}`;
 
   return (
     <div className={`${styles.post_card} shadow`}>

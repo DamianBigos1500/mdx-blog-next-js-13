@@ -1,0 +1,68 @@
+@import '@/styles/_animations';
+
+.dialog {
+  &__triger {
+    color: var(--white);
+    font-size: inherit;
+    width: 100%;
+    display: flex;
+    padding-left: 3rem;
+    align-items: flex-start;
+    background: inherit;
+    padding: 0.2rem 0.4rem;
+    border: transparent;
+    border-radius: 10px;
+    background-color: var(--color-secondary);
+    cursor: pointer;
+
+    :hover {
+      background-color: var(--color-tertiary);
+    }
+  }
+
+  &__overlay {
+    z-index: 999;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.3);
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    &[data-state='open'] {
+      animation: fadeIn 50ms ease-out;
+    }
+
+    &[data-state='closed'] {
+      animation: fadeOut 50ms ease-in;
+    }
+  }
+
+  &__content {
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    border: 1px solid var(--silver-grey);
+    background: var(--bg-color-secondary);
+    width: min(400px, 90vw);
+    max-height: min(90vh, 40rem);
+    overflow: auto;
+
+    &[data-state='open'] {
+      animation: fadeIn 50ms ease-out;
+    }
+
+    &[data-state='closed'] {
+      animation: fadeOut 50ms ease-in;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dialog {
+    &__triger {
+      background: inherit;
+    }
+  }
+}

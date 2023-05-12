@@ -1,0 +1,54 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes moveUp {
+  from {
+    transform: translateY(1rem);
+  }
+  to {
+    transform: translateY(0rem);
+  }
+}
+
+@keyframes moveDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(1rem);
+  }
+}
+
+@keyframes moveRight {
+  from {
+    transform: translateX(6rem);
+  }
+  to {
+    transform: translateX(0rem);
+  }
+}
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    display: none;
+    transform: translateX(6rem);
+  }
+}

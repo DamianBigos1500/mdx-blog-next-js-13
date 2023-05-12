@@ -6,6 +6,7 @@ import rootDirectory from '../utils/rootDirectory';
 import { IBlogPost } from '../types/BlogPost';
 import matter from 'gray-matter';
 import dayjs from 'dayjs';
+import { calculateReadingTime } from '@/utils/calculateReadingTime';
 
 const postFilesDir = rootDirectory + '/public/mdx';
 
@@ -50,7 +51,7 @@ const postsService = {
       } as IBlogPost['data'],
       content,
       slug,
-      // readingTime: calculateReadingTime(content),
+      readingTime: calculateReadingTime(content),
     };
     return fileContent;
   },

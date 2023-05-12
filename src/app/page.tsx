@@ -16,7 +16,7 @@ export default async function Home() {
       </div>
 
       <h1 className={styles.header__title}>Chocolate Lover&apos;s Delight</h1>
-      <Link className={styles.header__button} href={'/blogs'}>
+      <Link className={styles.header__button} href={'/posts'}>
         <span>Read</span>
       </Link>
     </div>
