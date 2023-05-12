@@ -7,9 +7,9 @@ import styles from '@/styles/pages/posts/post.module.scss';
 // import getCurrentUser from '@/utils/getCurrentUser';
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  // const post: any | null = await postsService.getPostBySlug(params.slug);
+  const post: any | null = await postsService.getPostBySlug(params.slug);
   // if (!post) return <div>no post found</div>;
-  console.log(params.slug);
+  console.log(post);
 
   // const { data, readingTime, content } = post;
 
