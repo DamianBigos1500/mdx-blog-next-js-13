@@ -21,7 +21,7 @@ const SignInModal: FC<SignInModalProps> = ({ getOpenValue }) => {
     if (getOpenValue) {
       getOpenValue(isOpen);
     }
-  }, [isOpen]);
+  }, [isOpen, getOpenValue]);
 
   return (
     <Dialog onOpenChange={(isOpened: any) => setIsOpen(isOpened)} open={isOpen}>
