@@ -7,11 +7,14 @@ import { IBlogPost } from '../types/BlogPost';
 import matter from 'gray-matter';
 import dayjs from 'dayjs';
 import { calculateReadingTime } from '@/utils/calculateReadingTime';
+import path from 'path';
 
-const postFilesDir = rootDirectory + '/public/mdx';
+// const postFilesDir = rootDirectory + '/public/mdx';
+const postFilesDir = path.join(process.cwd(),  'public', 'mdx');
 
 const postsService = {
   getPaths: () => {
+    console.log(postFilesDir);
     const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
 
     let paths: any[] = [];

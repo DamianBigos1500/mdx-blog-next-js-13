@@ -2,9 +2,11 @@ import MdxContent from '@/components/Mdx/MdxContent/MdxContent';
 import PostHeader from '@/features/post/components/PostHeader/PostHeader';
 import styles from '@/styles/pages/posts/post.module.scss';
 import axios from '@/lib/axios';
+import postsService from '@/services/posts.service';
 // import PostOptions from '@/components/postOptions/PostOptions';
 // import prisma from '@/lib/server';
 // import getCurrentUser from '@/utils/getCurrentUser';
+
 
 async function getData(slug: string) {
   const res = await fetch('api/getPostBySlug');
@@ -13,8 +15,8 @@ async function getData(slug: string) {
 }
 
 const page = async ({ params }: { params: { slug: string } }) => {
-  const res: any = await getData(params.slug);
-  const { data, readingTime, content } = res.data.post;
+  const post: any = postsService.getPostBySlug(params.slug);
+  const { data, readingTime, content } = post;
 
   // let pinnedId = '';
   // let currentUser;
