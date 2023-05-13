@@ -12,8 +12,8 @@ const PostHeader = ({ src, title }: PostHeaderProps) => {
       <Image
         src={src}
         alt=""
-        width={1920}
-        height={1080}
+        width={1398}
+        height={792}
         className={styles.image}
       />
       <div className={styles.title}>{title}</div>
