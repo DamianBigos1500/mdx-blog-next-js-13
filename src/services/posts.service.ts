@@ -1,20 +1,14 @@
-// import { calculateReadingTime } from './../utils/calculateReadingTime';
-// import { BlogPost } from './../utils/types';
-// import dayjs from 'dayjs';
-import fs from 'fs';
-import rootDirectory from '../utils/rootDirectory';
-import { IBlogPost } from '../types/BlogPost';
+import { calculateReadingTime } from '@/utils/calculateReadingTime';
 import matter from 'gray-matter';
 import dayjs from 'dayjs';
-import { calculateReadingTime } from '@/utils/calculateReadingTime';
 import path from 'path';
+import fs from 'fs';
+import { IPost } from '@/types/Post';
 
-// const postFilesDir = rootDirectory + '/public/mdx';
-const postFilesDir = path.join(process.cwd(),  'public', 'mdx');
+const postFilesDir = path.join(process.cwd(), 'public', 'mdx');
 
 const postsService = {
   getPaths: () => {
-    console.log(postFilesDir);
     const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
 
     let paths: any[] = [];
@@ -27,14 +21,15 @@ const postsService = {
     return paths;
   },
 
-  getPosts: (): IBlogPost[] => {
+  getPosts: (): IPost[] => {
     const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
-
-    let posts: IBlogPost[] = [];
+    let posts: IPost[] = [];
 
     dirFiles.map((file) => {
       if (!file.name.endsWith('.mdx')) return;
-      const post = postsService.getPostBySlug(file.name.replace('.mdx', ''));
+      const post: IPost = postsService.getPostBySlug(
+        file.name.replace('.mdx', '')
+      );
 
       posts.push(post);
     });
@@ -42,25 +37,20 @@ const postsService = {
     return posts;
   },
 
-  getPostBySlug: (slug: string): any => {
+  getPostBySlug: (slug: string): IPost => {
     const filePath = postFilesDir + '/' + slug + '.mdx';
+    const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' });
 
-    try {
-      const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' });
-
-      const { data, content } = matter(fileContent);
-      return {
-        data: {
-          ...data,
-          publishedAt: dayjs(data.publishedAt).format('DD MMMM YYYY'),
-        } as IBlogPost['data'],
-        content,
-        slug,
-        readingTime: calculateReadingTime(content),
-      };
-    } catch (error) {
-      return null;
-    }
+    const { data, content } = matter(fileContent);
+    return {
+      data: {
+        ...data,
+        publishedAt: dayjs(data.publishedAt).format('DD MMMM YYYY'),
+      } as IPost['data'],
+      content,
+      slug,
+      readingTime: calculateReadingTime(content),
+    };
   },
 };
 

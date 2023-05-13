@@ -12,6 +12,7 @@ import Icons from '@/components/UI/Icons/Icons';
 import styles from './themeToggle.module.scss';
 import dropdownStyles from '@/styles//UI/customDropdown.module.scss';
 
+
 interface ThemeToggleProps {}
 
 const ThemeToggle: FC<ThemeToggleProps> = ({}) => {

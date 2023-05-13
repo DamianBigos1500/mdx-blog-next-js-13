@@ -52,3 +52,37 @@
     transform: translateX(6rem);
   }
 }
+
+@keyframes moveX {
+  0% {
+    transform: translateX(0%);
+  }
+  25% {
+    transform: translateX(10%);
+  }
+  75% {
+    display: none;
+    transform: translateX(-10%);
+  }
+  100% {
+    display: none;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes moveY {
+  0% {
+    transform: translateY(0%);
+  }
+  25% {
+    transform: translateY(10%);
+  }
+  75% {
+    display: none;
+    transform: translateY(-10%);
+  }
+  100% {
+    display: none;
+    transform: translateY(0%);
+  }
+}

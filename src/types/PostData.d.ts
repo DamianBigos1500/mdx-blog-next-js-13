@@ -1,4 +1,4 @@
-export interface IBlogPostData {
+export interface IPostData {
   id?: string;
   title: string;
   imageUrl: string;

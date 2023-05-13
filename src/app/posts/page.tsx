@@ -8,6 +8,7 @@
 import BlogPostCard from '@/features/post/components/PostCard/PostCard';
 import postsService from '@/services/posts.service';
 import styles from '@/styles/pages/posts/posts.module.scss';
+import { IPost } from '@/types/Post';
 
 const page = async ({ searchParams }: any) => {
   // const blogPosts: BlogPost[] | undefined = await blogPostService.getBlogPosts(
@@ -18,7 +19,7 @@ const page = async ({ searchParams }: any) => {
   //   ingredients = await ingredientsService.getIngredients();
   // } catch (error) {}
 
-  const blogPosts: any | undefined = postsService.getPosts();
+  const posts: IPost[] = postsService.getPosts();
 
   return (
     <section className={styles.posts}>
@@ -27,7 +28,8 @@ const page = async ({ searchParams }: any) => {
         ingredients={ingredients}
         searchParams={searchParams}
       /> */}
-      {blogPosts?.map((post: any) => (
+
+      {posts?.map((post: any) => (
         <BlogPostCard key={post.slug} post={post} />
       ))}
     </section>

@@ -1,0 +1,51 @@
+@use '@/styles/_animations';
+
+.dropdown__theme {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &_moon {
+    position: absolute;
+    transition: all 0.8s;
+
+    &:hover {
+      animation: moveY 2s linear infinite;
+    }
+  }
+
+  &_sun {
+    transition: all 0.8s;
+
+    &:hover {
+      animation: rotate 2s linear infinite;
+    }
+  }
+
+  [class='dark'] &_sun {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+  [class='light'] &_sun {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+
+  [class='light'] &_moon {
+    opacity: 1;
+    transform: scale(1);
+  }
+  [class='dark'] &_moon {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

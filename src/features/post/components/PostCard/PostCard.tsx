@@ -5,9 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './postCard.module.scss';
+import { IPost } from '@/types/Post';
 
 interface BlogPostCardProps {
-  post: any;
+  post: IPost;
 }
 
 const BlogPostCard: FC<BlogPostCardProps> = ({ post }) => {

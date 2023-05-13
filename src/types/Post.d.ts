@@ -1,4 +1,4 @@
-export interface IBlogPost {
+export interface IPost {
   id?: string;
   data: BlogPostData;
   content: string;

@@ -5,28 +5,6 @@
     align-items: center;
     justify-content: center;
   }
-
-  &__time {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-  }
-
-  &__mdx {
-    overflow: hidden;
-  }
-
-  &__mdx > * {
-    overflow-wrap: break-word;
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    max-width: 90rem;
-    margin: 2rem auto;
-    padding: 0 min(3rem, 4vw);
-  }
 }
 
 @media screen and (max-width: 1200px) {
