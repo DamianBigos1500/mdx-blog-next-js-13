@@ -43,7 +43,7 @@ const postsService = {
     const filePath = postFilesDir + '/' + slug + '.mdx';
 
     try {
-      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' });
 
       const { data, content } = matter(fileContent);
       return {
