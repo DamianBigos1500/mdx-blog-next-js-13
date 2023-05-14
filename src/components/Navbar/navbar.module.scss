@@ -30,7 +30,7 @@
   &__links {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     list-style: none;
   }
 
@@ -57,7 +57,7 @@
   }
 
   &__item::before {
-    content: '';
+    content: 'asdasd';
     position: absolute;
     top: 0;
     left: 0;
@@ -82,6 +82,27 @@
 
   &__mobile_nav {
     display: none;
+  }
+
+  &__link {
+    position: relative;
+
+    &::before{
+      position: absolute;
+      content: '';
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: var(--color-fourth);
+      width: 0;
+      border-radius: 2rem;
+      transition: width 200ms ease-in;
+    }
+
+    &:hover:before,
+    &__active > &::before {
+      width: 100%;
+    }
   }
 }
 

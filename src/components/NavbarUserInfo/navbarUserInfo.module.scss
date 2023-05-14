@@ -1,0 +1,26 @@
+.user_info {
+  &__trigger {
+    border: transparent;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: inherit;
+
+    &:hover {
+      background: inherit;
+    }
+  }
+
+  &__image {
+    border-radius: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+}
+
+.link {
+  width: 100%;
+  height: 100%;
+}

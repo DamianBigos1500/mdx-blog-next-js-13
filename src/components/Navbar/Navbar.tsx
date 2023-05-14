@@ -1,7 +1,6 @@
 'use client';
 
 import { FC } from 'react';
-// import styles from '@/styles/components/navigation/navigation.module.scss';
 import Link from 'next/link';
 // import SignInModal from '../signInModal/SignInModal';
 // import UserInfo from '../userInfo/UserInfo';
@@ -12,12 +11,20 @@ import { IUser } from '@/types/User';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import styles from './navbar.module.scss';
 import SignInModal from '@/features/auth/components/SignInModal/SignInModal';
+import { usePathname } from 'next/navigation';
+import NavbarUserInfo from '../NavbarUserInfo/NavbarUserInfo';
 
 interface MobileNavbarProps {
   currentUser: IUser | null;
 }
 
 const Navbar: FC<MobileNavbarProps> = ({ currentUser }) => {
+  const pathname = usePathname();
+
+  const generateActive = (name: string) => {
+    return pathname === name ? styles.nav__link__active : '';
+  };
+
   return (
     <nav className={`${styles.nav} shadow`}>
       <Link href="/">
@@ -33,15 +40,20 @@ const Navbar: FC<MobileNavbarProps> = ({ currentUser }) => {
 
           {/* Links */}
           {navLinks.map((item) => (
-            <li key={item.name} className={styles.nav__item}>
-              <Link href={item.href}>{item.name}</Link>
+            <li
+              key={item.name}
+              className={`${styles.nav__item} ${generateActive(item.href)}`}
+            >
+              <Link href={item.href} className={styles.nav__link}>
+                {item.name}
+              </Link>
             </li>
           ))}
 
           {/* User */}
           {currentUser ? (
             <li className={styles.nav__item}>
-              {/* <UserInfo currentUser={currentUser} /> */}
+              <NavbarUserInfo currentUser={currentUser} />
             </li>
           ) : (
             <li className={styles.nav__item}>

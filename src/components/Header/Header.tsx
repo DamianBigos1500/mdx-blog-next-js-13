@@ -1,10 +1,8 @@
-// import getCurrentUser from '@/utils/getCurrentUser';
-
 import Navbar from '@/components/Navbar/Navbar';
+import getCurrentUser from '@/features/auth/utils/getCurrentSession';
 
 const Header = async () => {
-  // const currentUser = await getCurrentUser();
-  const currentUser = null;
+  const currentUser = await getCurrentUser();
 
   return (
     <header>

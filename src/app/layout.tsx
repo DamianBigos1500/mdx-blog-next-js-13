@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import Header from '@/components/Header/Header';
 import Providers from '@/components/Providers/Providers';
 import '@/styles/global.scss';
