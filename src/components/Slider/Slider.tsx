@@ -15,7 +15,8 @@ interface SliderProps {
 const Slider: FC<SliderProps> = ({ posts }) => {
   const windowSize = useWindowSize();
   const { current, increase, decrease, movedValue, itemWidth } = useSlider(
-    windowSize[0] > 1000 ? 3 : windowSize[0] < 600 ? 1 : 2,
+    // @ts-expect-error
+    windowSize.width > 1000 ? 3 : windowSize.width < 600 ? 1 : 2,
     posts.length
   );
 
