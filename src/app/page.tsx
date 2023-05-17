@@ -2,8 +2,17 @@ import Image from 'next/image';
 import styles from '@/styles/pages/home.module.scss';
 import Link from 'next/link';
 import Slider from '@/components/Slider/Slider';
+import postsService from '@/services/posts.service';
+import { IPost } from '@/types/Post';
+
+async function getData() {
+  const posts: IPost[] = postsService.getPosts();
+  return { posts };
+}
 
 export default async function Home() {
+  const { posts } = await getData();
+
   return (
     <div className={styles.home}>
       <div>
@@ -22,7 +31,7 @@ export default async function Home() {
       </Link>
 
       <section className={styles.slider}>
-        <Slider />
+        <Slider posts={posts} />
       </section>
     </div>
   );

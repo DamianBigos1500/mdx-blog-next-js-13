@@ -13,6 +13,7 @@ import styles from './navbar.module.scss';
 import SignInModal from '@/features/auth/components/SignInModal/SignInModal';
 import { usePathname } from 'next/navigation';
 import NavbarUserInfo from '../NavbarUserInfo/NavbarUserInfo';
+import MobileNavbar from '../mobile/MoblieNavbar/MoblieNavbar';
 
 interface MobileNavbarProps {
   currentUser: IUser | null;
@@ -63,7 +64,7 @@ const Navbar: FC<MobileNavbarProps> = ({ currentUser }) => {
         </ul>
 
         <div className={styles.nav__mobile_nav}>
-          {/* <MobileNavbar currentUser={currentUser} /> */}
+          <MobileNavbar currentUser={currentUser} />
         </div>
       </div>
     </nav>

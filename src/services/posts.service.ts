@@ -9,7 +9,7 @@ import { checkQueryMatch } from '@/utils/checkQueryMatch';
 const postFilesDir = path.join(process.cwd(), 'public', 'mdx');
 
 const postsService = {
-  getPosts: (searchParams: any): IPost[] => {
+  getPosts: (searchParams?: any): IPost[] => {
     const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
     let posts: IPost[] = [];
 
@@ -19,8 +19,10 @@ const postsService = {
         file.name.replace('.mdx', '')
       );
 
-      const isQueryPost: boolean = checkQueryMatch(post, searchParams);
-      if (isQueryPost) posts.push(post);
+      if (searchParams) {
+        const isQueryPost: boolean = checkQueryMatch(post, searchParams);
+        if (isQueryPost) posts.push(post);
+      } else posts.push(post);
     });
 
     return posts;

@@ -3,10 +3,8 @@ import { useState } from 'react';
 const useSlider = (perPage: number, maxValue: number) => {
   const [current, setCurrent] = useState(0);
 
-  console.log(current);
-
   function increase(value: number): void {
-    if (current + value  > maxValue - perPage) setCurrent(maxValue - perPage);
+    if (current + value > maxValue - perPage) setCurrent(maxValue - perPage);
     else setCurrent(current + value);
   }
 
@@ -15,7 +13,13 @@ const useSlider = (perPage: number, maxValue: number) => {
     else setCurrent(current - value);
   }
 
-  return { current, increase, decrease };
+  return {
+    current,
+    increase,
+    decrease,
+    movedValue: -current * (100 / perPage),
+    itemWidth: 100 / perPage,
+  };
 };
 
 export default useSlider;

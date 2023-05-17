@@ -9,7 +9,6 @@ import bcrypt from 'bcrypt';
 import { Validate } from '@/class/Validate';
 import { signInRules } from '@/utils/validationRules';
 
-
 function checkCredentialsExistance(id?: string, secret?: string) {
   if (!id || id.length == 0) {
     throw new Error('No clientId for google provider set');
@@ -99,12 +98,15 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (user && user.password) {
-          const isValid = bcrypt.compare(credentials?.password!, user.password);
-          console.log(user);
-          return user;
-        } else {
-          return null;
+          const isValid = await bcrypt.compare(
+            credentials?.password!,
+            user.password
+          );
+          if (isValid) {
+            return user;
+          }
         }
+        return null;
       },
     }),
     GoogleProvider({

@@ -1,42 +1,53 @@
 'use client';
 
 import useSlider from '@/hooks/useSlider';
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import styles from './slider.module.scss';
+import { IPost } from '@/types/Post';
+import PostItemCard from '@/features/post/components/PostItemCard/PostItemCard';
+import useWindowSize from '@/hooks/useWindowSize';
+import Icons from '../UI/Icons/Icons';
 
-interface SliderProps {}
+interface SliderProps {
+  posts: IPost[];
+}
 
-const Slider: FC<SliderProps> = ({}) => {
-  const { current, increase, decrease } = useSlider(4, 8);
+const Slider: FC<SliderProps> = ({ posts }) => {
+  const windowSize = useWindowSize();
+  const { current, increase, decrease, movedValue, itemWidth } = useSlider(
+    windowSize[0] > 1000 ? 3 : windowSize[0] < 600 ? 1 : 2,
+    posts.length
+  );
 
   return (
     <div className={styles.slider}>
+      <h2>Featured Cakes</h2>
       <button
         className={styles.slider__button}
         style={{ left: 0 }}
         onClick={() => decrease(1)}
       >
-        dec
+        <Icons.ChevronLeft size={40} />
       </button>
       <div
         className={styles.slider__container}
-        style={{ transform: `translateX(${25 * -current}%)` }}
+        style={{ transform: `translateX(${movedValue}%)` }}
       >
-        <div className={styles.slider__item}>asdasd</div>
-        <div className={styles.slider__item}>asdasd</div>
-        <div className={styles.slider__item}>asdasd</div>
-        <div className={styles.slider__item}>asdasd</div>
-        <div className={styles.slider__item}>asdasd</div>
-        <div className={styles.slider__item}>asdasd</div>
-        <div className={styles.slider__item}>asdasd</div>
-        <div className={styles.slider__item}>asdasd</div>
+        {posts.map((post: IPost) => (
+          <div
+            className={styles.slider__item}
+            style={{ width: `${itemWidth}%` }}
+          >
+            <PostItemCard post={post} />
+          </div>
+        ))}
       </div>
       <button
         className={styles.slider__button}
         style={{ right: 0 }}
         onClick={() => increase(1)}
       >
-        Slider
+        <Icons.ChevronRight size={40}  />
       </button>
     </div>
   );
