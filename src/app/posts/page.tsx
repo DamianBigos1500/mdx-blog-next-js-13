@@ -1,33 +1,27 @@
-// import BlogPostCard from '@/components/blogPostCard/BlogPostCard';
-// import { blogPostService } from 'src/services/blogPost.service';
-// import { BlogPost } from '@/utils/types';
-// import { ingredientsService } from 'src/services/ingredients.service';
-// import IngredientsFilter from '@/components/ingredientsFilter/IngredientsFilter';
-// import SearchFilter from '@/components/searchFilter/SearchFilter';
-
+import IngredientsFilter from '@/features/post/components/IngredientsFilter/IngredientsFilter';
 import BlogPostCard from '@/features/post/components/PostCard/PostCard';
+import SearchFilter from '@/features/post/components/SearchFilter/SearchFilter';
 import postsService from '@/services/posts.service';
 import styles from '@/styles/pages/posts/posts.module.scss';
 import { IPost } from '@/types/Post';
 
-const page = async ({ searchParams }: any) => {
-  // const blogPosts: BlogPost[] | undefined = await blogPostService.getBlogPosts(
-  //   searchParams
-  // );
-  // let ingredients;
-  // try {
-  //   ingredients = await ingredientsService.getIngredients();
-  // } catch (error) {}
+async function getData(searchParams: any) {
+  const posts: IPost[] = postsService.getPosts(searchParams);
+  const ingredients: string[] = postsService.getAllIngredients();
 
-  const posts: IPost[] = postsService.getPosts();
+  return { posts, ingredients };
+}
+
+const page = async ({ searchParams }: any) => {
+  const { posts, ingredients } = await getData(searchParams);
 
   return (
     <section className={styles.posts}>
-      {/* <SearchFilter searchParams={searchParams} /> */}
-      {/* <IngredientsFilter
-        ingredients={ingredients}
+      <SearchFilter searchParams={searchParams} />
+      <IngredientsFilter
         searchParams={searchParams}
-      /> */}
+        ingredients={ingredients}
+      />
 
       {posts?.map((post: any) => (
         <BlogPostCard key={post.slug} post={post} />

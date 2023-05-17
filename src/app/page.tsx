@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import styles from '@/styles/pages/home.module.scss';
 import Link from 'next/link';
+import Slider from '@/components/Slider/Slider';
 
 export default async function Home() {
   return (
@@ -19,6 +20,10 @@ export default async function Home() {
       <Link className={styles.header__button} href={'/posts'}>
         <span>Read</span>
       </Link>
+
+      <section className={styles.slider}>
+        <Slider />
+      </section>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 export interface IPost {
   id?: string;
-  data: BlogPostData;
+  data: IPostData;
   content: string;
   slug: string;
   readingTime: number;

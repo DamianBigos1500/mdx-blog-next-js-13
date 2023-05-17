@@ -4,24 +4,12 @@ import dayjs from 'dayjs';
 import path from 'path';
 import fs from 'fs';
 import { IPost } from '@/types/Post';
+import { checkQueryMatch } from '@/utils/checkQueryMatch';
 
 const postFilesDir = path.join(process.cwd(), 'public', 'mdx');
 
 const postsService = {
-  getPaths: () => {
-    const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
-
-    let paths: any[] = [];
-
-    dirFiles.map((file) => {
-      if (!file.name.endsWith('.mdx')) return;
-      paths.push({ slug: file.name.replace('.mdx', '') });
-    });
-
-    return paths;
-  },
-
-  getPosts: (): IPost[] => {
+  getPosts: (searchParams: any): IPost[] => {
     const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
     let posts: IPost[] = [];
 
@@ -31,7 +19,8 @@ const postsService = {
         file.name.replace('.mdx', '')
       );
 
-      posts.push(post);
+      const isQueryPost: boolean = checkQueryMatch(post, searchParams);
+      if (isQueryPost) posts.push(post);
     });
 
     return posts;
@@ -51,6 +40,26 @@ const postsService = {
       slug,
       readingTime: calculateReadingTime(content),
     };
+  },
+
+  getAllIngredients: (): string[] => {
+    const dirFiles = fs.readdirSync(postFilesDir, { withFileTypes: true });
+    let ingredients = new Set<string>([]);
+
+    dirFiles.map((file) => {
+      if (!file.name.endsWith('.mdx')) return;
+
+      const { data }: IPost = postsService.getPostBySlug(
+        file.name.replace('.mdx', '')
+      );
+
+      data.ingredients.reduce((acc: any, ing: string[]) => {
+        acc.add(ing);
+        return acc;
+      }, ingredients);
+    });
+
+    return Array.from(ingredients);
   },
 };
 
