@@ -33,8 +33,9 @@ const Slider: FC<SliderProps> = ({ posts }) => {
         className={styles.slider__container}
         style={{ transform: `translateX(${movedValue}%)` }}
       >
-        {posts.map((post: IPost) => (
+        {posts.map((post: IPost, index: number) => (
           <div
+            key={index}
             className={styles.slider__item}
             style={{ width: `${itemWidth}%` }}
           >
@@ -47,7 +48,7 @@ const Slider: FC<SliderProps> = ({ posts }) => {
         style={{ right: 0 }}
         onClick={() => increase(1)}
       >
-        <Icons.ChevronRight size={40}  />
+        <Icons.ChevronRight size={40} />
       </button>
     </div>
   );
