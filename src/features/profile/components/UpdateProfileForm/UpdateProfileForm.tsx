@@ -17,6 +17,7 @@ import { IUser } from '@/types/User';
 import { Validate } from '@/class/Validate';
 import { updateProfileRules } from '@/utils/validationRules';
 import useImageFileReader from '@/hooks/useImageFileReader';
+import { profileService } from '../../services/profile.service';
 
 interface UpdateProfileFormProps {
   currentUser: IUser;
@@ -75,7 +76,7 @@ const UpdateProfileForm: FC<UpdateProfileFormProps> = ({
     }
 
     try {
-      await axios.post('api/update-profile', validateData);
+      await profileService.updateProfile(validateData)
       setServerResponse({ message: 'Settings updated succesfully', code: 200 });
     } catch (error: any) {
       if (error.response.status === 422) {
